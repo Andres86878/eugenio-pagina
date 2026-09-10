@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title id="page-title">Eugenio Carreño Jr. | Trompetista Solista</title>
     <!-- Tipografías de Alta Gama -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
             --sidebar-width: 280px; 
             --transition-luxury: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-smooth: all 0.3s ease;
+            --header-mobile-height: 75px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,6 +28,7 @@
             scroll-behavior: smooth;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-blue) var(--bg-dark);
+            overflow-x: hidden;
         }
 
         /* EFECTO DE GRANO CINEMATOGRÁFICO SUTIL */
@@ -39,10 +41,11 @@
         body {
             background-color: var(--bg-dark); color: var(--text-main);
             font-family: 'Montserrat', sans-serif; line-height: 1.8; display: flex;
-            font-weight: 300; letter-spacing: 0.3px; overflow-x: hidden;
+            font-weight: 300; letter-spacing: 0.3px; overflow-x: hidden; width: 100vw;
         }
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; font-weight: 400; color: #ffffff; }
+
         .sr-only { display: none; }
 
         /* --- PANTALLA DE CARGA --- */
@@ -77,12 +80,8 @@
         .brand-container:hover .brand-subtitle { color: #ffffff; }
 
         /* BOTÓN DE MENÚ (OCULTO EN ESCRITORIO) */
-        .menu-toggle {
-            display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001;
-        }
-        .menu-toggle span {
-            width: 25px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px;
-        }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px; }
+        .menu-toggle span { width: 28px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px; }
 
         /* NAVEGACIÓN LATERAL */
         nav { width: 100%; margin: auto 0; position: relative; z-index: 1; }
@@ -97,18 +96,16 @@
 
         /* SELECTOR DE IDIOMA */
         .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth);}
-        .language-switcher:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(100, 149, 237, 0.3); }
         .lang-icon { width: 13px; height: 13px; color: var(--accent-blue); flex-shrink: 0; }
         .lang-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; padding: 2px 4px; transition: var(--transition-smooth); }
-        .lang-btn:hover, .lang-btn.active { color: #ffffff; font-weight: 500; }
-        .lang-btn.active { color: var(--accent-blue); }
+        .lang-btn.active { color: var(--accent-blue); font-weight: 500;}
         .lang-divider { color: rgba(255, 255, 255, 0.1); font-size: 0.6rem; }
 
         .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; }
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
         /* --- CONTENIDO PRINCIPAL --- */
-        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); display: flex; flex-direction: column;}
+        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); display: flex; flex-direction: column; overflow-x: hidden;}
         section { padding: 8rem 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
         .section-title { font-size: 2.8rem; margin-bottom: 3.5rem; letter-spacing: 1px; text-align: left; font-weight: 400; position: relative; z-index: 2;}
@@ -129,7 +126,8 @@
         .photo-frame::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inset 0 0 50px rgba(0,0,0,0.5); pointer-events: none; }
 
         /* --- HERO SECCIÓN (CARRUSEL) --- */
-        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh;}
+        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center;}
+        
         .hero-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-placeholder); z-index: 0; pointer-events: none; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; background-position: center 25%; opacity: 0; transform: scale(1.05); transition: opacity 1.5s ease, transform 8s linear; }
         .hero-slide.active { opacity: 1; transform: scale(1); }
@@ -205,79 +203,105 @@
         .contact-card-action { margin-top: 2rem; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; transition: var(--transition-smooth); }
         .contact-card:hover .contact-card-action { color: #ffffff; transform: translateX(3px); }
 
-        /* --- ANIMACIONES DE APARICIÓN --- */
+        /* --- ANIMACIONES --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* ========================================================================= */
-        /* --- RESPONSIVO PARA MÓVILES (REDISEÑO FLUIDO) --- */
+        /* --- RESPONSIVO TOTAL (TABLETS Y SMARTPHONES) --- */
         /* ========================================================================= */
+        
         @media (max-width: 1024px) {
-            /* Sidebar a Header Flotante */
+            /* Transformación del Sidebar a Header Fijo Superior */
             aside {
-                width: 100%; height: 75px; flex-direction: row; padding: 0 1.5rem;
-                border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                width: 100%; height: var(--header-mobile-height); flex-direction: row; padding: 0 1.5rem;
+                border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                 background: rgba(13, 18, 29, 0.98); backdrop-filter: blur(10px);
+                z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             }
             aside::before, .sidebar-footer { display: none; }
             
-            .brand-container { flex-direction: row; width: auto; align-items: center; gap: 8px; }
+            /* Logo compacto en móvil */
+            .brand-container { flex-direction: row; width: auto; align-items: center; gap: 8px; margin: 0; }
             .brand-signature { border: none; padding: 0; margin: 0; background: transparent; }
-            .signature-first { font-size: 1.1rem; display: inline-block; }
+            .signature-first { font-size: 1.1rem; display: inline-block; letter-spacing: 2px; }
             .signature-last { font-size: 1rem; display: inline-block; margin-left: 5px; }
             .brand-subtitle { display: none; }
 
-            /* Language Switcher en el Header */
-            .language-switcher { margin: 0 15px 0 auto; padding: 4px 8px; border: none; background: transparent; }
-
-            /* Menú de Hamburguesa Activo */
+            /* Menú Hamburguesa Visible */
             .menu-toggle { display: flex; }
-            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
-            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Navegación colapsable */
+            /* Menú de Navegación Desplegable */
             nav {
-                position: absolute; top: 75px; left: 0; width: 100%;
+                position: absolute; top: var(--header-mobile-height); left: 0; width: 100%;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
-                padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
+                padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.6);
             }
-            nav.open { max-height: 400px; padding: 2rem 0; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+            nav.open { max-height: 500px; padding: 2rem 0; }
             nav ul { gap: 1.8rem; }
             nav a { font-size: 0.75rem; letter-spacing: 5px; }
             nav a::before { display: none; }
 
-            /* Ajustes Generales de Estructura */
-            main { margin-left: 0; width: 100%; }
-            #inicio { padding-top: 75px; /* Offset para el header fijo */ }
-            section { padding: 5rem 6%; min-height: auto; }
+            /* Selector de Idiomas adaptado al menú móvil */
+            .language-switcher { margin: 1.5rem auto 0 auto; width: fit-content; background: rgba(0,0,0,0.2); }
+
+            /* Ajustes Generales de la Vista */
+            main { margin-left: 0; width: 100%; margin-top: 0; }
+            section { padding: 6rem 5%; min-height: auto; }
+            #inicio { height: 100vh; padding-top: var(--header-mobile-height); }
             
+            /* Cuadrículas a 1 columna */
             .clean-layout, .clean-layout.reverse { grid-template-columns: 1fr; gap: 3rem; }
             .clean-layout.reverse .photo-frame { grid-row: 1; }
-            .photo-frame { height: 400px; max-width: 100%; margin: 0; }
             
-            /* Ajuste de Hero y Tipografía */
-            .hero-content h1 { font-size: 3.5rem; }
-            .hero-content p { font-size: 1.05rem; }
+            /* Ajustes en Fotografías */
+            .photo-frame { height: 450px; max-width: 100%; border-radius: 4px; }
+            
+            /* Ajuste tipográfico y de botones para Tablet/Móvil Grande */
+            .hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;}
+            .hero-content p { font-size: 1.05rem; margin-bottom: 2.5rem;}
             .hero-dots { left: 50%; transform: translateX(-50%); bottom: 2rem; }
             
-            .testimonial-grid { grid-template-columns: 1fr; gap: 2rem;}
-            .parallax-banner { height: 40vh; background-attachment: scroll; /* Fix para iOS */ }
+            .testimonial-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .parallax-banner { height: 40vh; background-attachment: scroll; /* Corrige fallos de parallax en iOS Safari */ }
         }
 
-        /* Responsive Smartphones Pequeños */
+        /* --- OPTIMIZACIÓN EXTREMA PARA SMARTPHONES (iPhone, Android) --- */
         @media (max-width: 768px) {
-            section { padding: 4rem 5%; }
-            .hero-content h1 { font-size: 2.8rem; line-height: 1.1;}
-            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
-            .photo-frame { height: 320px; }
+            section { padding: 4.5rem 5%; }
+            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; text-align: center; }
+            .section-title::after { margin: 15px auto 0 auto; }
+            
+            .hero-content { text-align: center; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-content p { font-size: 1rem; text-align: center; }
+            
+            /* Botones Apilados de Ancho Completo */
             .btn-group { flex-direction: column; width: 100%; gap: 1rem; }
-            .btn { width: 100%; text-align: center; }
-            .testimonial-card { padding: 2rem 1.5rem; }
-            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 1rem; }
-            .repertorio-item { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem 0; }
-            .repertorio-item span { align-self: flex-start; }
+            .btn { width: 100%; text-align: center; padding: 1.2rem; }
+
+            .photo-frame { height: 350px; }
+            
+            .text-block p { font-size: 1rem; text-align: left; }
+            
+            .testimonial-card { padding: 2.5rem 1.5rem; text-align: center; }
+            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 50%; transform: translateX(50%); opacity: 0.5;}
+            .testimonial-card p.quote { font-size: 1.05rem; }
+
+            /* Lista de repertorio ajustada para pulgares */
+            .repertorio-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.8rem 0; text-align: left;}
+            .repertorio-item h4 { font-size: 1.2rem; }
+            .repertorio-item span { align-self: flex-start; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; }
+
             .parallax-content h3 { font-size: 1.8rem; }
+            .parallax-content p { font-size: 0.65rem; }
+
+            .contact-card { padding: 1.5rem; }
+            .contact-card-value { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -292,7 +316,7 @@
         </div>
     </div>
 
-    <!-- MENÚ LATERAL / HEADER FLUIDO EN MÓVIL -->
+    <!-- HEADER / SIDEBAR RESPONSIVO -->
     <aside>
         <a href="#inicio" class="brand-container">
             <div class="brand-signature">
@@ -310,21 +334,21 @@
                 <li><a href="#repertorio" class="nav-link" data-i18n="nav-repertoire">Repertorio</a></li>
                 <li><a href="#contacto" class="nav-link" data-i18n="nav-contact">Contacto</a></li>
             </ul>
+            <!-- Selector de idioma integrado al menú en móviles -->
+            <div class="language-switcher">
+                <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+                <span class="lang-divider">/</span>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                <span class="lang-divider">/</span>
+                <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+            </div>
         </nav>
 
-        <div class="language-switcher">
-            <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
-            <span class="lang-divider">/</span>
-            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
-            <span class="lang-divider">/</span>
-            <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-        </div>
-
-        <!-- Botón Hamburguesa para Móvil -->
+        <!-- Botón de Hamburguesa Exclusivo para Móviles -->
         <div class="menu-toggle" id="menu-btn">
             <span></span>
             <span></span>
@@ -335,7 +359,7 @@
     </aside>
 
     <main>
-        <!-- 1. INICIO (SLIDESHOW) -->
+        <!-- 1. INICIO (SLIDESHOW SEGURO) -->
         <section id="inicio">
             <div class="hero-slideshow">
                 <div class="hero-slide active" style="background-image: url('foto.1.JPG');"></div>
@@ -496,12 +520,12 @@
         </section>
     </main>
 
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS MÓVILES, ANIMACIONES Y TRADUCCIONES -->
     <script>
-        // Restauración de scroll manual
+        // Restauración de scroll manual (Para siempre iniciar arriba al cargar)
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
 
-        // Manejo del menú en móvil (Hamburguesa)
+        // --- MANEJO DEL MENÚ MÓVIL (HAMBURGUESA) ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileNav = document.getElementById('mobile-nav');
         
@@ -510,7 +534,7 @@
             mobileNav.classList.toggle('open');
         });
 
-        // Cerrar menú al hacer clic en un enlace (en móvil)
+        // Cerrar menú al hacer clic en un enlace (Solo en móvil)
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if(window.innerWidth <= 1024) {
@@ -520,7 +544,7 @@
             });
         });
 
-        // Loader Seguro
+        // --- SISTEMA DE PANTALLA DE CARGA (LOADER) ---
         function hideSplash() {
             const splash = document.getElementById('splash-screen');
             if(splash && splash.style.opacity !== '0') {
@@ -531,13 +555,12 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             window.scrollTo(0, 0);
-            setTimeout(hideSplash, 500); 
+            setTimeout(hideSplash, 600); 
         });
-
         window.addEventListener('load', () => { setTimeout(hideSplash, 200); });
-        setTimeout(hideSplash, 2500); // Fail-safe fallback
+        setTimeout(hideSplash, 2500); // Fail-safe (Tiempo máximo de carga)
 
-        // --- SLIDESHOW HERO ---
+        // --- SLIDESHOW DEL HERO ---
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.hero-dot');
@@ -553,12 +576,7 @@
 
         function nextSlide() { showSlide(currentSlideIndex + 1); }
         function currentSlide(index) { showSlide(index); resetInterval(); }
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 6000); 
-        }
-
+        function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 6000); }
         slideInterval = setInterval(nextSlide, 6000);
 
         // --- TRADUCCIONES ---
@@ -648,20 +666,28 @@
                 if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
             document.getElementById('page-title').innerText = translations[lang].pageTitle;
+            // Cerrar menú móvil si se cambia el idioma
+            if(window.innerWidth <= 1024) {
+                menuBtn.classList.remove('active');
+                mobileNav.classList.remove('open');
+            }
         }
 
-        // --- EFECTOS DE SCROLL ---
+        // --- EFECTOS DE SCROLL (REVEAL) ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+                // En móviles revelamos un poco antes para mejor experiencia
+                var elementVisible = window.innerWidth <= 768 ? 50 : 120; 
+                if (elementTop < windowHeight - elementVisible) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal, { passive: true });
         reveal();
 
+        // Resaltar Link Activo en el Menú según la posición del scroll
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll(".nav-link");
         window.addEventListener("scroll", () => {
