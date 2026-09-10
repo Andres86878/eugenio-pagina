@@ -211,13 +211,13 @@
         /* --- PIE DE PÁGINA (FOOTER) --- */
         .site-footer {
             text-align: center;
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             background-color: var(--bg-panel);
             border-top: 1px solid rgba(255, 255, 255, 0.03);
             margin-top: auto;
         }
         .site-footer p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -241,11 +241,12 @@
                 z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             }
             
-            /* Logo compacto en móvil */
-            .brand-container { flex-direction: row; width: auto; align-items: center; gap: 8px; margin: 0; }
-            .brand-signature { border: none; padding: 0; margin: 0; background: transparent; }
-            .signature-first { font-size: 1.1rem; display: inline-block; letter-spacing: 2px; }
-            .signature-last { font-size: 1rem; display: inline-block; margin-left: 5px; }
+            /* Logo compacto en móvil para evitar que se rompa el nombre largo */
+            .brand-container { flex-direction: row; width: auto; align-items: center; gap: 6px; margin: 0; }
+            .brand-signature { border: none; padding: 0; margin: 0; background: transparent; display: flex; align-items: baseline; white-space: nowrap;}
+            .signature-first { font-size: 0.95rem; display: inline-block; letter-spacing: 1px; }
+            .signature-last { font-size: 0.85rem; display: inline-block; margin-left: 4px; }
+            .brand-subtitle { display: none; }
 
             /* Menú Hamburguesa Visible */
             .menu-toggle { display: flex; }
@@ -266,11 +267,11 @@
 
             /* Ajustes Generales de la Vista */
             main { margin-left: 0; width: 100%; margin-top: 0; }
-            section { padding: 6rem 5%; min-height: auto; }
+            section { padding: 5rem 6%; min-height: auto; }
             #inicio { height: 100vh; padding-top: var(--header-mobile-height); }
             
             /* Cuadrículas adaptadas para móvil: FOTO ARRIBA, TEXTO ABAJO */
-            .clean-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .clean-layout { grid-template-columns: 1fr; gap: 2.5rem; }
             .clean-layout .photo-frame { order: 1; }
             .clean-layout .text-block { order: 2; }
             
@@ -278,7 +279,7 @@
             .clean-layout.reverse .photo-frame { order: 1; }
             .clean-layout.reverse .text-block { order: 2; }
             
-            /* Fotografías con Proporciones de Revista (4:5) en lugar de alturas fijas */
+            /* FOTOGRAFÍAS: Proporción 4:5 estilo revista en móvil */
             .photo-frame { height: auto; aspect-ratio: 4 / 5; max-width: 100%; margin: 0 auto; border-radius: 6px; }
             
             /* Ajuste de Textos Hero */
@@ -293,9 +294,16 @@
         /* --- OPTIMIZACIÓN EXTREMA PARA CELULARES PEQUEÑOS --- */
         @media (max-width: 768px) {
             section { padding: 4.5rem 5%; }
-            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; text-align: left; }
+            .section-title { font-size: 2.2rem; margin-bottom: 2rem; text-align: left; }
             .section-title::after { margin: 15px 0 0 0; }
             
+            /* Ajuste extra de logo para teléfonos muy finos (iPhone SE) */
+            @media (max-width: 375px) {
+                aside { padding: 0 1rem; }
+                .signature-first { font-size: 0.85rem; letter-spacing: 0.5px; }
+                .loader-text { font-size: 0.65rem; letter-spacing: 2px; }
+            }
+
             .hero-content { text-align: center; }
             .hero-content h1 { font-size: 2.8rem; }
             .hero-content p { font-size: 1rem; text-align: center; padding: 0 10px;}
@@ -303,10 +311,6 @@
             /* Botones Apilados 100% (Touch Friendly) */
             .btn-group { flex-direction: column; width: 100%; gap: 1rem; }
             .btn { width: 100%; text-align: center; padding: 1.2rem; }
-
-            /* Fotografías adaptadas para que se vea el rostro */
-            .photo-frame { aspect-ratio: 4 / 5; }
-            .photo-frame img { object-position: center 15%; } /* Mantiene la cara enfocada */
             
             .text-block p { font-size: 1rem; text-align: left; }
             
@@ -394,7 +398,7 @@
                 <span class="pre-title" data-i18n="hero-pre">Solista Internacional</span>
                 <h1><span data-i18n="hero-h1-1">El arte del sonido</span><br><span data-i18n="hero-h1-2">y la orquestación.</span></h1>
                 <p data-i18n="hero-p">Forjado en El Sistema de Venezuela y perfeccionado en el Conservatorio Nacional Superior de París. Una técnica sinfónica de altísimo nivel, consolidada al asumir como trompetista solista de la prestigiosa Orquesta Nacional de Lyon.</p>
-                <span class="sr-only">[cite: 1]</span>
+                <span class="sr-only"></span>
                 
                 <div class="btn-group">
                     <a href="#repertorio" class="btn btn-solid" data-i18n="btn-works">Explorar Obras</a>
@@ -416,18 +420,18 @@
             <h2 class="section-title reveal" data-i18n="bio-title">Trayectoria</h2>
             
             <div class="clean-layout reveal">
-                <!-- La foto irá arriba en móviles por la regla order: 1 -->
+                <!-- En móvil esto se pondrá arriba automáticamente por la clase clean-layout -->
                 <div class="photo-frame">
                     <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
                 </div>
 
                 <div class="text-block">
                     <p data-i18n="bio-p1">Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.</p>
-                    <span class="sr-only">[cite: 1]</span>
+                    <span class="sr-only"></span>
                     <p data-i18n="bio-p2">Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.</p>
-                    <span class="sr-only">[cite: 1]</span>
+                    <span class="sr-only"></span>
                     <p data-i18n="bio-p3">Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.</p>
-                    <span class="sr-only">[cite: 1]</span>
+                    <span class="sr-only"></span>
                     
                     <div class="highlight-box">
                         <h4 data-i18n="bio-box-title">Trompetista Solista | Orquesta Nacional de Lyon</h4>
@@ -452,13 +456,13 @@
             <div class="testimonial-grid reveal">
                 <div class="testimonial-card">
                     <p class="quote">"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right."</p>
-                    <span class="sr-only">[cite: 1]</span>
+                    <span class="sr-only"></span>
                     <h4>Gustavo Dudamel</h4>
                     <span data-i18n="dudamel-title">Music Director, LA Phil / New York Philharmonic</span>
                 </div>
                 <div class="testimonial-card">
                     <p class="quote" data-i18n="quote-2">"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa."</p>
-                    <span class="sr-only">[cite: 1]</span>
+                    <span class="sr-only"></span>
                     <h4>Pacho Flores</h4>
                     <span data-i18n="quote-2-sub">Solista Internacional</span>
                 </div>
@@ -522,7 +526,7 @@
                             <div>
                                 <div class="contact-card-type" data-i18n="contact-c2-type">Direct Line</div>
                                 <div class="contact-card-value">+33 (7) 45 65 22 18</div>
-                                <span class="sr-only">[cite: 1]</span>
+                                <span class="sr-only"></span>
                             </div>
                             <div class="contact-card-action" data-i18n="contact-c2-act">Llamar Ahora ➔</div>
                         </a>
@@ -531,7 +535,7 @@
                             <div>
                                 <div class="contact-card-type">Instagram</div>
                                 <div class="contact-card-value">@eugeniocarrenojr</div>
-                                <span class="sr-only">[cite: 1]</span>
+                                <span class="sr-only"></span>
                             </div>
                             <div class="contact-card-action" data-i18n="contact-c3-act">Visitar Perfil ➔</div>
                         </a>
