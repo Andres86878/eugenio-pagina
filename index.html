@@ -43,14 +43,13 @@
         }
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; font-weight: 400; color: #ffffff; }
-
         .sr-only { display: none; }
 
         /* --- PANTALLA DE CARGA --- */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-color: var(--bg-dark); display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 1s ease, visibility 1s ease;
+            z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease;
         }
         
         .loader-container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
@@ -60,15 +59,15 @@
         @keyframes drop { 0% { top: -50%; } 100% { top: 150%; } }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* --- SIDEBAR IZQUIERDO --- */
+        /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
             position: fixed; display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; padding: 2.5rem 1.5rem; border-right: 1px solid rgba(255, 255, 255, 0.03);
-            z-index: 100; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            z-index: 1000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
         }
 
-        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 1; }
+        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; }
         .brand-signature { padding: 1.2rem 0.8rem; width: 100%; border-top: 1px solid rgba(100, 149, 237, 0.15); border-bottom: 1px solid rgba(100, 149, 237, 0.15); margin-bottom: 1rem; transition: var(--transition-luxury); position: relative; }
         .brand-container:hover .brand-signature { border-color: var(--accent-blue); background-color: var(--accent-blue-glow); }
         .signature-first { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; color: #ffffff; letter-spacing: 2.5px; text-transform: uppercase; transition: var(--transition-smooth); display: block; }
@@ -76,6 +75,14 @@
         .brand-container:hover .signature-first { color: var(--accent-blue); }
         .brand-subtitle { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 0.5rem; transition: var(--transition-smooth); }
         .brand-container:hover .brand-subtitle { color: #ffffff; }
+
+        /* BOTÓN DE MENÚ (OCULTO EN ESCRITORIO) */
+        .menu-toggle {
+            display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001;
+        }
+        .menu-toggle span {
+            width: 25px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px;
+        }
 
         /* NAVEGACIÓN LATERAL */
         nav { width: 100%; margin: auto 0; position: relative; z-index: 1; }
@@ -101,74 +108,34 @@
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
         /* --- CONTENIDO PRINCIPAL --- */
-        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); display: flex; flex-direction: column;}
         section { padding: 8rem 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
         .section-title { font-size: 2.8rem; margin-bottom: 3.5rem; letter-spacing: 1px; text-align: left; font-weight: 400; position: relative; z-index: 2;}
         .section-title::after { content: ''; display: block; width: 45px; height: 1px; background-color: var(--accent-blue); margin-top: 20px; transition: width 0.6s ease; }
         section:hover .section-title::after { width: 70px; }
 
-        /* --- DISEÑO EDITORIAL LIMPIO Y SIMÉTRICO --- */
-        .clean-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-        
-        .clean-layout.reverse {
-            grid-template-columns: 1fr 1fr;
-        }
+        /* --- DISEÑO EDITORIAL --- */
+        .clean-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .clean-layout.reverse { grid-template-columns: 1fr 1fr; }
+        .text-block { display: flex; flex-direction: column; justify-content: center; }
 
-        .text-block {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* Contenedor de Imagen Profesional */
         .photo-frame {
-            width: 100%;
-            height: 650px;
-            background-color: var(--bg-placeholder);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%; height: 650px; background-color: var(--bg-placeholder); border-radius: 4px;
+            overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.4); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
-            transition: transform 1.5s ease;
-        }
-
-        .photo-frame:hover img {
-            transform: scale(1.04);
-        }
-
-        /* Sutil viñeta para darle profundidad a la foto */
-        .photo-frame::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: inset 0 0 50px rgba(0,0,0,0.5);
-            pointer-events: none;
-        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transition: transform 1.5s ease; }
+        .photo-frame:hover img { transform: scale(1.04); }
+        .photo-frame::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inset 0 0 50px rgba(0,0,0,0.5); pointer-events: none; }
 
         /* --- HERO SECCIÓN (CARRUSEL) --- */
-        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center;}
-        
+        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh;}
         .hero-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-placeholder); z-index: 0; pointer-events: none; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; background-position: center 25%; opacity: 0; transform: scale(1.05); transition: opacity 1.5s ease, transform 8s linear; }
         .hero-slide.active { opacity: 1; transform: scale(1); }
-        
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(7, 10, 16, 0.90) 0%, rgba(7, 10, 16, 0.65) 50%, rgba(7, 10, 16, 0.95) 100%); z-index: 1; pointer-events: none; }
         
-        .hero-content { position: relative; z-index: 3; max-width: 900px; }
+        .hero-content { position: relative; z-index: 3; max-width: 900px; width: 100%; }
         .pre-title { display: inline-block; font-size: 0.75rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 1.5rem; font-weight: 500; }
         .hero-content h1 { font-size: 4.8rem; line-height: 1.05; margin-bottom: 2rem; letter-spacing: -0.5px; }
         .hero-content h1 span { color: var(--text-muted); font-style: italic; font-weight: 300; }
@@ -188,7 +155,7 @@
         .btn-solid::before { background-color: var(--accent-blue); }
         .btn-solid:hover { border-color: var(--accent-blue); color: #ffffff; }
 
-        /* --- BIOGRAFÍA (FOTO 2) --- */
+        /* --- BIOGRAFÍA --- */
         #biografia { z-index: 2; background-color: var(--bg-panel);}
         .text-block p { font-size: 1.05rem; line-height: 2; margin-bottom: 1.5rem; text-align: justify; color: var(--text-main); font-weight: 300;}
         .highlight-box { margin-top: 2rem; padding: 2rem; border-left: 2px solid var(--accent-blue); background: rgba(255,255,255,0.01); transition: var(--transition-smooth); }
@@ -196,7 +163,7 @@
         .highlight-box h4 { font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--accent-blue); letter-spacing: 1px; font-weight: 400;}
         .highlight-box p { font-size: 0.95rem; margin-bottom: 0; color: var(--text-main); text-align: left; line-height: 1.8; }
 
-        /* --- BANNERS PARALLAX (FOTO 3) --- */
+        /* --- BANNERS PARALLAX --- */
         .parallax-banner { height: 50vh; width: 100%; position: relative; background-color: var(--bg-placeholder); background-image: url('foto.3.JPG'); background-attachment: fixed; background-size: cover; background-position: center 30%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .parallax-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 10, 16, 0.7); }
         .parallax-content { position: relative; z-index: 1; text-align: center; max-width: 800px; padding: 0 2rem; }
@@ -212,7 +179,7 @@
         .testimonial-card h4 { font-size: 1.1rem; margin-bottom: 0.2rem; letter-spacing: 1px; color: var(--accent-blue); font-weight: 400;}
         .testimonial-card span { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- REPERTORIO (FOTO 4) --- */
+        /* --- REPERTORIO --- */
         #repertorio { background-color: var(--bg-panel); }
         .repertorio-list { display: flex; flex-direction: column; width: 100%; }
         .repertorio-item { display: flex; justify-content: space-between; align-items: center; padding: 2.5rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition-smooth); text-decoration: none; color: inherit; position: relative; }
@@ -224,7 +191,7 @@
         .repertorio-item span { font-size: 0.6rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; transition: var(--transition-smooth);}
         .repertorio-item:hover span { color: var(--accent-blue); }
 
-        /* --- CONTACTO (FOTO 5) --- */
+        /* --- CONTACTO --- */
         #contacto { background-color: var(--bg-dark); }
         .contact-content > p { font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.8; color: var(--text-main); }
         .contact-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
@@ -242,24 +209,75 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- RESPONSIVO --- */
+        /* ========================================================================= */
+        /* --- RESPONSIVO PARA MÓVILES (REDISEÑO FLUIDO) --- */
+        /* ========================================================================= */
         @media (max-width: 1024px) {
-            body { flex-direction: column; }
-            aside { width: 100%; height: auto; position: relative; padding: 2rem; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); justify-content: center; gap: 1.5rem; box-shadow: none; z-index: 100;}
+            /* Sidebar a Header Flotante */
+            aside {
+                width: 100%; height: 75px; flex-direction: row; padding: 0 1.5rem;
+                border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                background: rgba(13, 18, 29, 0.98); backdrop-filter: blur(10px);
+            }
             aside::before, .sidebar-footer { display: none; }
-            nav { margin: 0; }
-            nav ul { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+            
+            .brand-container { flex-direction: row; width: auto; align-items: center; gap: 8px; }
+            .brand-signature { border: none; padding: 0; margin: 0; background: transparent; }
+            .signature-first { font-size: 1.1rem; display: inline-block; }
+            .signature-last { font-size: 1rem; display: inline-block; margin-left: 5px; }
+            .brand-subtitle { display: none; }
+
+            /* Language Switcher en el Header */
+            .language-switcher { margin: 0 15px 0 auto; padding: 4px 8px; border: none; background: transparent; }
+
+            /* Menú de Hamburguesa Activo */
+            .menu-toggle { display: flex; }
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+            /* Navegación colapsable */
+            nav {
+                position: absolute; top: 75px; left: 0; width: 100%;
+                background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
+                padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
+            }
+            nav.open { max-height: 400px; padding: 2rem 0; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+            nav ul { gap: 1.8rem; }
+            nav a { font-size: 0.75rem; letter-spacing: 5px; }
             nav a::before { display: none; }
+
+            /* Ajustes Generales de Estructura */
             main { margin-left: 0; width: 100%; }
+            #inicio { padding-top: 75px; /* Offset para el header fijo */ }
             section { padding: 5rem 6%; min-height: auto; }
             
             .clean-layout, .clean-layout.reverse { grid-template-columns: 1fr; gap: 3rem; }
             .clean-layout.reverse .photo-frame { grid-row: 1; }
-            .photo-frame { height: 450px; max-width: 600px; margin: 0 auto; }
+            .photo-frame { height: 400px; max-width: 100%; margin: 0; }
             
-            .hero-content h1 { font-size: 3.2rem; }
-            .testimonial-grid { grid-template-columns: 1fr; }
-            .parallax-banner { height: 40vh; }
+            /* Ajuste de Hero y Tipografía */
+            .hero-content h1 { font-size: 3.5rem; }
+            .hero-content p { font-size: 1.05rem; }
+            .hero-dots { left: 50%; transform: translateX(-50%); bottom: 2rem; }
+            
+            .testimonial-grid { grid-template-columns: 1fr; gap: 2rem;}
+            .parallax-banner { height: 40vh; background-attachment: scroll; /* Fix para iOS */ }
+        }
+
+        /* Responsive Smartphones Pequeños */
+        @media (max-width: 768px) {
+            section { padding: 4rem 5%; }
+            .hero-content h1 { font-size: 2.8rem; line-height: 1.1;}
+            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
+            .photo-frame { height: 320px; }
+            .btn-group { flex-direction: column; width: 100%; gap: 1rem; }
+            .btn { width: 100%; text-align: center; }
+            .testimonial-card { padding: 2rem 1.5rem; }
+            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 1rem; }
+            .repertorio-item { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem 0; }
+            .repertorio-item span { align-self: flex-start; }
+            .parallax-content h3 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -274,7 +292,7 @@
         </div>
     </div>
 
-    <!-- MENÚ LATERAL -->
+    <!-- MENÚ LATERAL / HEADER FLUIDO EN MÓVIL -->
     <aside>
         <a href="#inicio" class="brand-container">
             <div class="brand-signature">
@@ -284,7 +302,7 @@
             <span class="brand-subtitle" data-i18n="subtitle">Trompeta Clásica</span>
         </a>
         
-        <nav>
+        <nav id="mobile-nav">
             <ul>
                 <li><a href="#inicio" class="nav-link" data-i18n="nav-home">Inicio</a></li>
                 <li><a href="#biografia" class="nav-link" data-i18n="nav-bio">Biografía</a></li>
@@ -306,11 +324,18 @@
             <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
         </div>
 
+        <!-- Botón Hamburguesa para Móvil -->
+        <div class="menu-toggle" id="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <div class="sidebar-footer"><span>Paris</span><span>Lyon</span></div>
     </aside>
 
     <main>
-        <!-- 1. INICIO (SLIDESHOW SEGURO) -->
+        <!-- 1. INICIO (SLIDESHOW) -->
         <section id="inicio">
             <div class="hero-slideshow">
                 <div class="hero-slide active" style="background-image: url('foto.1.JPG');"></div>
@@ -325,6 +350,7 @@
                 <span class="pre-title" data-i18n="hero-pre">Solista Internacional</span>
                 <h1><span data-i18n="hero-h1-1">El arte del sonido</span><br><span data-i18n="hero-h1-2">y la orquestación.</span></h1>
                 <p data-i18n="hero-p">Forjado en El Sistema de Venezuela y perfeccionado en el Conservatorio Nacional Superior de París. Una técnica sinfónica de altísimo nivel, consolidada al asumir como trompetista solista de la prestigiosa Orquesta Nacional de Lyon.</p>
+                <span class="sr-only">[cite: 1]</span>
                 
                 <div class="btn-group">
                     <a href="#repertorio" class="btn btn-solid" data-i18n="btn-works">Explorar Obras</a>
@@ -341,15 +367,18 @@
             </div>
         </section>
 
-        <!-- 2. BIOGRAFÍA (DISEÑO CLÁSICO LIMPIO) -->
+        <!-- 2. BIOGRAFÍA -->
         <section id="biografia">
             <h2 class="section-title reveal" data-i18n="bio-title">Trayectoria</h2>
             
             <div class="clean-layout reveal">
                 <div class="text-block">
                     <p data-i18n="bio-p1">Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.</p>
+                    <span class="sr-only">[cite: 1]</span>
                     <p data-i18n="bio-p2">Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.</p>
+                    <span class="sr-only">[cite: 1]</span>
                     <p data-i18n="bio-p3">Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.</p>
+                    <span class="sr-only">[cite: 1]</span>
                     
                     <div class="highlight-box">
                         <h4 data-i18n="bio-box-title">Trompetista Solista | Orquesta Nacional de Lyon</h4>
@@ -378,18 +407,20 @@
             <div class="testimonial-grid reveal">
                 <div class="testimonial-card">
                     <p class="quote">"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right."</p>
+                    <span class="sr-only">[cite: 1]</span>
                     <h4>Gustavo Dudamel</h4>
                     <span data-i18n="dudamel-title">Music Director, LA Phil / New York Philharmonic</span>
                 </div>
                 <div class="testimonial-card">
                     <p class="quote" data-i18n="quote-2">"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa."</p>
+                    <span class="sr-only">[cite: 1]</span>
                     <h4>Pacho Flores</h4>
                     <span data-i18n="quote-2-sub">Solista Internacional</span>
                 </div>
             </div>
         </section>
 
-        <!-- 4. REPERTORIO (DISEÑO CLÁSICO INVERSO) -->
+        <!-- 4. REPERTORIO -->
         <section id="repertorio">
             <h2 class="section-title reveal" data-i18n="rep-title">Repertorio Destacado</h2>
             
@@ -442,6 +473,7 @@
                             <div>
                                 <div class="contact-card-type" data-i18n="contact-c2-type">Direct Line</div>
                                 <div class="contact-card-value">+33 (7) 45 65 22 18</div>
+                                <span class="sr-only">[cite: 1]</span>
                             </div>
                             <div class="contact-card-action" data-i18n="contact-c2-act">Llamar Ahora ➔</div>
                         </a>
@@ -450,6 +482,7 @@
                             <div>
                                 <div class="contact-card-type">Instagram</div>
                                 <div class="contact-card-value">@eugeniocarrenojr</div>
+                                <span class="sr-only">[cite: 1]</span>
                             </div>
                             <div class="contact-card-action" data-i18n="contact-c3-act">Visitar Perfil ➔</div>
                         </a>
@@ -465,15 +498,35 @@
 
     <!-- SCRIPTS -->
     <script>
+        // Restauración de scroll manual
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
 
+        // Manejo del menú en móvil (Hamburguesa)
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (en móvil)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth <= 1024) {
+                    menuBtn.classList.remove('active');
+                    mobileNav.classList.remove('open');
+                }
+            });
+        });
+
+        // Loader Seguro
         function hideSplash() {
             const splash = document.getElementById('splash-screen');
             if(splash && splash.style.opacity !== '0') {
                 splash.style.opacity = '0';
                 setTimeout(() => { splash.style.visibility = 'hidden'; }, 800);
             }
-            window.scrollTo(0, 0);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -482,9 +535,9 @@
         });
 
         window.addEventListener('load', () => { setTimeout(hideSplash, 200); });
-        setTimeout(hideSplash, 2000); 
+        setTimeout(hideSplash, 2500); // Fail-safe fallback
 
-        // --- SLIDESHOW ---
+        // --- SLIDESHOW HERO ---
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.hero-dot');
