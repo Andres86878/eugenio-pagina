@@ -41,8 +41,10 @@
         body {
             background-color: var(--bg-dark); color: var(--text-main);
             font-family: 'Montserrat', sans-serif; line-height: 1.8; display: flex;
-            font-weight: 300; letter-spacing: 0.3px; overflow-x: hidden; width: 100vw;
+            flex-direction: column; font-weight: 300; letter-spacing: 0.3px; overflow-x: hidden; width: 100vw;
         }
+
+        @media (min-width: 1025px) { body { flex-direction: row; } }
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; font-weight: 400; color: #ffffff; }
 
@@ -96,16 +98,18 @@
 
         /* SELECTOR DE IDIOMA */
         .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth);}
+        .language-switcher:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(100, 149, 237, 0.3); }
         .lang-icon { width: 13px; height: 13px; color: var(--accent-blue); flex-shrink: 0; }
         .lang-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; padding: 2px 4px; transition: var(--transition-smooth); }
-        .lang-btn.active { color: var(--accent-blue); font-weight: 500;}
+        .lang-btn:hover, .lang-btn.active { color: #ffffff; font-weight: 500; }
+        .lang-btn.active { color: var(--accent-blue); }
         .lang-divider { color: rgba(255, 255, 255, 0.1); font-size: 0.6rem; }
 
         .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; }
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
         /* --- CONTENIDO PRINCIPAL --- */
-        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); display: flex; flex-direction: column; overflow-x: hidden;}
+        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); display: flex; flex-direction: column; overflow-x: hidden; flex: 1;}
         section { padding: 8rem 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
         .section-title { font-size: 2.8rem; margin-bottom: 3.5rem; letter-spacing: 1px; text-align: left; font-weight: 400; position: relative; z-index: 2;}
@@ -115,23 +119,24 @@
         /* --- DISEÑO EDITORIAL --- */
         .clean-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
         .clean-layout.reverse { grid-template-columns: 1fr 1fr; }
-        .text-block { display: flex; flex-direction: column; justify-content: center; }
+        .text-block { display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
+        /* CONTENEDOR DE FOTOS EDITORIAL */
         .photo-frame {
-            width: 100%; height: 650px; background-color: var(--bg-placeholder); border-radius: 4px;
-            overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.4); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%; height: 650px; background-color: var(--bg-placeholder); border-radius: 6px;
+            overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1;
         }
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transition: transform 1.5s ease; }
-        .photo-frame:hover img { transform: scale(1.04); }
-        .photo-frame::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inset 0 0 50px rgba(0,0,0,0.5); pointer-events: none; }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease; filter: contrast(1.05) brightness(0.95); }
+        .photo-frame:hover img { transform: scale(1.05); filter: contrast(1.1) brightness(1.05); }
+        .photo-frame::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inset 0 0 40px rgba(0,0,0,0.4); pointer-events: none; }
 
         /* --- HERO SECCIÓN (CARRUSEL) --- */
-        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center;}
-        
+        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh;}
         .hero-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-placeholder); z-index: 0; pointer-events: none; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; background-position: center 25%; opacity: 0; transform: scale(1.05); transition: opacity 1.5s ease, transform 8s linear; }
         .hero-slide.active { opacity: 1; transform: scale(1); }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(7, 10, 16, 0.90) 0%, rgba(7, 10, 16, 0.65) 50%, rgba(7, 10, 16, 0.95) 100%); z-index: 1; pointer-events: none; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(7, 10, 16, 0.90) 0%, rgba(7, 10, 16, 0.60) 50%, rgba(7, 10, 16, 0.95) 100%); z-index: 1; pointer-events: none; }
         
         .hero-content { position: relative; z-index: 3; max-width: 900px; width: 100%; }
         .pre-title { display: inline-block; font-size: 0.75rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 1.5rem; font-weight: 500; }
@@ -203,9 +208,25 @@
         .contact-card-action { margin-top: 2rem; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; transition: var(--transition-smooth); }
         .contact-card:hover .contact-card-action { color: #ffffff; transform: translateX(3px); }
 
+        /* --- PIE DE PÁGINA (FOOTER) --- */
+        .site-footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background-color: var(--bg-panel);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: auto;
+        }
+        .site-footer p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         /* --- ANIMACIONES --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
 
         /* ========================================================================= */
         /* --- RESPONSIVO TOTAL (TABLETS Y SMARTPHONES) --- */
@@ -219,14 +240,12 @@
                 background: rgba(13, 18, 29, 0.98); backdrop-filter: blur(10px);
                 z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             }
-            aside::before, .sidebar-footer { display: none; }
             
             /* Logo compacto en móvil */
             .brand-container { flex-direction: row; width: auto; align-items: center; gap: 8px; margin: 0; }
             .brand-signature { border: none; padding: 0; margin: 0; background: transparent; }
             .signature-first { font-size: 1.1rem; display: inline-block; letter-spacing: 2px; }
             .signature-last { font-size: 1rem; display: inline-block; margin-left: 5px; }
-            .brand-subtitle { display: none; }
 
             /* Menú Hamburguesa Visible */
             .menu-toggle { display: flex; }
@@ -244,55 +263,58 @@
             nav.open { max-height: 500px; padding: 2rem 0; }
             nav ul { gap: 1.8rem; }
             nav a { font-size: 0.75rem; letter-spacing: 5px; }
-            nav a::before { display: none; }
-
-            /* Selector de Idiomas adaptado al menú móvil */
-            .language-switcher { margin: 1.5rem auto 0 auto; width: fit-content; background: rgba(0,0,0,0.2); }
 
             /* Ajustes Generales de la Vista */
             main { margin-left: 0; width: 100%; margin-top: 0; }
             section { padding: 6rem 5%; min-height: auto; }
             #inicio { height: 100vh; padding-top: var(--header-mobile-height); }
             
-            /* Cuadrículas a 1 columna */
-            .clean-layout, .clean-layout.reverse { grid-template-columns: 1fr; gap: 3rem; }
-            .clean-layout.reverse .photo-frame { grid-row: 1; }
+            /* Cuadrículas adaptadas para móvil: FOTO ARRIBA, TEXTO ABAJO */
+            .clean-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .clean-layout .photo-frame { order: 1; }
+            .clean-layout .text-block { order: 2; }
             
-            /* Ajustes en Fotografías */
-            .photo-frame { height: 450px; max-width: 100%; border-radius: 4px; }
+            .clean-layout.reverse { grid-template-columns: 1fr; }
+            .clean-layout.reverse .photo-frame { order: 1; }
+            .clean-layout.reverse .text-block { order: 2; }
             
-            /* Ajuste tipográfico y de botones para Tablet/Móvil Grande */
+            /* Fotografías con Proporciones de Revista (4:5) en lugar de alturas fijas */
+            .photo-frame { height: auto; aspect-ratio: 4 / 5; max-width: 100%; margin: 0 auto; border-radius: 6px; }
+            
+            /* Ajuste de Textos Hero */
             .hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;}
             .hero-content p { font-size: 1.05rem; margin-bottom: 2.5rem;}
             .hero-dots { left: 50%; transform: translateX(-50%); bottom: 2rem; }
             
             .testimonial-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .parallax-banner { height: 40vh; background-attachment: scroll; /* Corrige fallos de parallax en iOS Safari */ }
+            .parallax-banner { height: 40vh; background-attachment: scroll; /* Para iOS Safari */ }
         }
 
-        /* --- OPTIMIZACIÓN EXTREMA PARA SMARTPHONES (iPhone, Android) --- */
+        /* --- OPTIMIZACIÓN EXTREMA PARA CELULARES PEQUEÑOS --- */
         @media (max-width: 768px) {
             section { padding: 4.5rem 5%; }
-            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; text-align: center; }
-            .section-title::after { margin: 15px auto 0 auto; }
+            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; text-align: left; }
+            .section-title::after { margin: 15px 0 0 0; }
             
             .hero-content { text-align: center; }
             .hero-content h1 { font-size: 2.8rem; }
-            .hero-content p { font-size: 1rem; text-align: center; }
+            .hero-content p { font-size: 1rem; text-align: center; padding: 0 10px;}
             
-            /* Botones Apilados de Ancho Completo */
+            /* Botones Apilados 100% (Touch Friendly) */
             .btn-group { flex-direction: column; width: 100%; gap: 1rem; }
             .btn { width: 100%; text-align: center; padding: 1.2rem; }
 
-            .photo-frame { height: 350px; }
+            /* Fotografías adaptadas para que se vea el rostro */
+            .photo-frame { aspect-ratio: 4 / 5; }
+            .photo-frame img { object-position: center 15%; } /* Mantiene la cara enfocada */
             
             .text-block p { font-size: 1rem; text-align: left; }
             
-            .testimonial-card { padding: 2.5rem 1.5rem; text-align: center; }
-            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 50%; transform: translateX(50%); opacity: 0.5;}
+            .testimonial-card { padding: 2.5rem 1.5rem; text-align: left; }
+            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 1rem; opacity: 0.5;}
             .testimonial-card p.quote { font-size: 1.05rem; }
 
-            /* Lista de repertorio ajustada para pulgares */
+            /* Lista adaptada */
             .repertorio-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.8rem 0; text-align: left;}
             .repertorio-item h4 { font-size: 1.2rem; }
             .repertorio-item span { align-self: flex-start; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; }
@@ -338,7 +360,7 @@
             <div class="language-switcher">
                 <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
                 </svg>
                 <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
                 <span class="lang-divider">/</span>
@@ -354,12 +376,10 @@
             <span></span>
             <span></span>
         </div>
-
-        <div class="sidebar-footer"><span>Paris</span><span>Lyon</span></div>
     </aside>
 
     <main>
-        <!-- 1. INICIO (SLIDESHOW SEGURO) -->
+        <!-- 1. INICIO (SLIDESHOW) -->
         <section id="inicio">
             <div class="hero-slideshow">
                 <div class="hero-slide active" style="background-image: url('foto.1.JPG');"></div>
@@ -396,6 +416,11 @@
             <h2 class="section-title reveal" data-i18n="bio-title">Trayectoria</h2>
             
             <div class="clean-layout reveal">
+                <!-- La foto irá arriba en móviles por la regla order: 1 -->
+                <div class="photo-frame">
+                    <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
+                </div>
+
                 <div class="text-block">
                     <p data-i18n="bio-p1">Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.</p>
                     <span class="sr-only">[cite: 1]</span>
@@ -408,10 +433,6 @@
                         <h4 data-i18n="bio-box-title">Trompetista Solista | Orquesta Nacional de Lyon</h4>
                         <p data-i18n="bio-box-p">Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.</p>
                     </div>
-                </div>
-                
-                <div class="photo-frame">
-                    <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
                 </div>
             </div>
         </section>
@@ -481,6 +502,10 @@
             <h2 class="section-title reveal" data-i18n="contact-title">Contacto</h2>
             
             <div class="clean-layout reveal">
+                <div class="photo-frame">
+                    <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
+                </div>
+
                 <div class="contact-content">
                     <p data-i18n="contact-p">Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.</p>
                     
@@ -512,12 +537,13 @@
                         </a>
                     </div>
                 </div>
-                
-                <div class="photo-frame">
-                    <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
-                </div>
             </div>
         </section>
+
+        <!-- FOOTER / DERECHOS RESERVADOS -->
+        <footer class="site-footer">
+            <p data-i18n="footer-rights">&copy; 2026 Eugenio Carreño Jr. Todos los derechos reservados.</p>
+        </footer>
     </main>
 
     <!-- SCRIPTS MÓVILES, ANIMACIONES Y TRADUCCIONES -->
@@ -555,10 +581,10 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             window.scrollTo(0, 0);
-            setTimeout(hideSplash, 600); 
+            setTimeout(hideSplash, 400); 
         });
-        window.addEventListener('load', () => { setTimeout(hideSplash, 200); });
-        setTimeout(hideSplash, 2500); // Fail-safe (Tiempo máximo de carga)
+        window.addEventListener('load', () => { setTimeout(hideSplash, 100); });
+        setTimeout(hideSplash, 2000); // Fail-safe (Tiempo máximo de carga)
 
         // --- SLIDESHOW DEL HERO ---
         let currentSlideIndex = 0;
@@ -591,7 +617,7 @@
                 "bio-title": "Trayectoria",
                 "bio-p1": "Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.",
                 "bio-p2": "Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.",
-                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
+                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de Música y Danza de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
                 "bio-box-title": "Trompetista Solista | Orquesta Nacional de Lyon",
                 "bio-box-p": "Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.",
                 "parallax-quote": "\"La música es la arquitectura del sonido, y la trompeta, su voz más brillante.\"",
@@ -604,7 +630,8 @@
                 "contact-title": "Contacto", "contact-p": "Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Enviar Correo ➔",
                 "contact-c2-type": "Direct Line", "contact-c2-act": "Llamar Ahora ➔",
-                "contact-c3-act": "Visitar Perfil ➔"
+                "contact-c3-act": "Visitar Perfil ➔",
+                "footer-rights": "&copy; 2026 Eugenio Carreño Jr. Todos los derechos reservados."
             },
             en: {
                 pageTitle: "Eugenio Carreño Jr. | Solo Trumpeter",
@@ -629,7 +656,8 @@
                 "contact-title": "Contact", "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Send Email ➔",
                 "contact-c2-type": "Direct Line", "contact-c2-act": "Call Now ➔",
-                "contact-c3-act": "Visit Profile ➔"
+                "contact-c3-act": "Visit Profile ➔",
+                "footer-rights": "&copy; 2026 Eugenio Carreño Jr. All rights reserved."
             },
             fr: {
                 pageTitle: "Eugenio Carreño Jr. | Trompettiste Soliste",
@@ -654,7 +682,8 @@
                 "contact-title": "Contact", "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Envoyer un Email ➔",
                 "contact-c2-type": "Ligne Directe", "contact-c2-act": "Appeler Maintenant ➔",
-                "contact-c3-act": "Visiter le Profil ➔"
+                "contact-c3-act": "Visiter le Profil ➔",
+                "footer-rights": "&copy; 2026 Eugenio Carreño Jr. Tous droits réservés."
             }
         };
 
@@ -666,7 +695,7 @@
                 if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
             document.getElementById('page-title').innerText = translations[lang].pageTitle;
-            // Cerrar menú móvil si se cambia el idioma
+            // Cerrar menú móvil al seleccionar idioma
             if(window.innerWidth <= 1024) {
                 menuBtn.classList.remove('active');
                 mobileNav.classList.remove('open');
@@ -679,7 +708,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                // En móviles revelamos un poco antes para mejor experiencia
+                // Reveal anticipado en móvil para mayor fluidez
                 var elementVisible = window.innerWidth <= 768 ? 50 : 120; 
                 if (elementTop < windowHeight - elementVisible) { reveals[i].classList.add("active"); }
             }
@@ -687,7 +716,7 @@
         window.addEventListener("scroll", reveal, { passive: true });
         reveal();
 
-        // Resaltar Link Activo en el Menú según la posición del scroll
+        // Resaltar Link Activo en el Menú
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll(".nav-link");
         window.addEventListener("scroll", () => {
