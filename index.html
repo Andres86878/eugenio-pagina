@@ -22,18 +22,21 @@
             --header-mobile-height: 75px;
         }
 
+        /* RESET PROFESIONAL (Evita espacios y scroll horizontal) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
+        html, body {
             scroll-behavior: smooth;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-blue) var(--bg-dark);
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
 
         /* EFECTO DE GRANO CINEMATOGRÁFICO SUTIL */
         body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 9998; opacity: 0.02;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
@@ -41,7 +44,8 @@
         body {
             background-color: var(--bg-dark); color: var(--text-main);
             font-family: 'Montserrat', sans-serif; line-height: 1.8; display: flex;
-            flex-direction: column; font-weight: 300; letter-spacing: 0.3px; overflow-x: hidden; width: 100vw;
+            flex-direction: column; font-weight: 300; letter-spacing: 0.3px;
+            min-height: 100vh;
         }
 
         @media (min-width: 1025px) { body { flex-direction: row; } }
@@ -52,7 +56,7 @@
 
         /* --- PANTALLA DE CARGA --- */
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg-dark); display: flex; justify-content: center; align-items: center;
             z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease;
         }
@@ -67,17 +71,26 @@
         /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
-            position: fixed; display: flex; flex-direction: column; justify-content: space-between;
+            position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; padding: 2.5rem 1.5rem; border-right: 1px solid rgba(255, 255, 255, 0.03);
             z-index: 1000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
         }
 
+        /* --- LOGO INCREÍBLE (UNIFICADO EN UNA SOLA LÍNEA) --- */
         .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; }
-        .brand-signature { padding: 1.2rem 0.8rem; width: 100%; border-top: 1px solid rgba(100, 149, 237, 0.15); border-bottom: 1px solid rgba(100, 149, 237, 0.15); margin-bottom: 1rem; transition: var(--transition-luxury); position: relative; }
+        .brand-signature { 
+            display: flex; align-items: baseline; justify-content: center; gap: 6px;
+            padding: 1.2rem 0.5rem; width: 100%; 
+            border-top: 1px solid rgba(100, 149, 237, 0.15); border-bottom: 1px solid rgba(100, 149, 237, 0.15); 
+            margin-bottom: 1rem; transition: var(--transition-luxury);
+            white-space: nowrap; /* Evita que el Jr. se vaya a la línea de abajo */
+        }
         .brand-container:hover .brand-signature { border-color: var(--accent-blue); background-color: var(--accent-blue-glow); }
-        .signature-first { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; color: #ffffff; letter-spacing: 2.5px; text-transform: uppercase; transition: var(--transition-smooth); display: block; }
-        .signature-last { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--accent-blue); letter-spacing: 2px; margin-top: 2px; transition: var(--transition-smooth); display: block; }
+        .signature-first { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; color: #ffffff; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition-smooth); }
+        .signature-last { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; color: var(--accent-blue); letter-spacing: 1px; transition: var(--transition-smooth); }
         .brand-container:hover .signature-first { color: var(--accent-blue); }
+        .brand-container:hover .signature-last { color: #ffffff; }
+        
         .brand-subtitle { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 0.5rem; transition: var(--transition-smooth); }
         .brand-container:hover .brand-subtitle { color: #ffffff; }
 
@@ -85,18 +98,18 @@
         .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px; }
         .menu-toggle span { width: 28px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px; }
 
-        /* NAVEGACIÓN LATERAL */
-        nav { width: 100%; margin: auto 0; position: relative; z-index: 1; }
-        nav ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; text-align: center; }
-        nav li { transition: transform var(--transition-smooth); }
-        nav li:hover { transform: translateX(3px); }
-        nav a { display: inline-block; text-decoration: none; color: var(--text-muted); font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; transition: var(--transition-smooth); position: relative; padding: 0.2rem 0; font-weight: 400; }
-        nav a::before { content: ''; position: absolute; left: -15px; top: 50%; transform: translateY(-50%) scaleY(0); width: 2px; height: 12px; background-color: var(--accent-blue); transition: var(--transition-smooth); }
-        nav a:hover::before, nav a.active::before { transform: translateY(-50%) scaleY(1); }
-        nav a:hover, nav a.active { color: #ffffff; }
-        nav a.active { color: var(--accent-blue); font-weight: 500; }
+        /* NAVEGACIÓN LATERAL (ESCRITORIO) */
+        nav.desktop-nav { width: 100%; margin: auto 0; position: relative; z-index: 1; }
+        nav.desktop-nav ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; text-align: center; }
+        nav.desktop-nav li { transition: transform var(--transition-smooth); }
+        nav.desktop-nav li:hover { transform: translateX(3px); }
+        nav.desktop-nav a { display: inline-block; text-decoration: none; color: var(--text-muted); font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; transition: var(--transition-smooth); position: relative; padding: 0.2rem 0; font-weight: 400; }
+        nav.desktop-nav a::before { content: ''; position: absolute; left: -15px; top: 50%; transform: translateY(-50%) scaleY(0); width: 2px; height: 12px; background-color: var(--accent-blue); transition: var(--transition-smooth); }
+        nav.desktop-nav a:hover::before, nav.desktop-nav a.active::before { transform: translateY(-50%) scaleY(1); }
+        nav.desktop-nav a:hover, nav.desktop-nav a.active { color: #ffffff; }
+        nav.desktop-nav a.active { color: var(--accent-blue); font-weight: 500; }
 
-        /* SELECTOR DE IDIOMA */
+        /* SELECTOR DE IDIOMA ORIGINAL Y ELEGANTE */
         .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth);}
         .language-switcher:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(100, 149, 237, 0.3); }
         .lang-icon { width: 13px; height: 13px; color: var(--accent-blue); flex-shrink: 0; }
@@ -108,28 +121,68 @@
         .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; }
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
+        /* NAV MÓVIL (OCULTO EN ESCRITORIO) */
+        nav.mobile-overlay { display: none; }
+
         /* --- CONTENIDO PRINCIPAL --- */
-        main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); display: flex; flex-direction: column; overflow-x: hidden; flex: 1;}
-        section { padding: 8rem 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        main { 
+            margin-left: var(--sidebar-width); 
+            width: calc(100% - var(--sidebar-width)); 
+            display: flex; flex-direction: column; flex: 1;
+        }
+
+        section { 
+            padding: 8rem 8%; min-height: 100vh; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; border-bottom: 1px solid rgba(255,255,255,0.02);
+            width: 100%;
+        }
         
+        /* Contenedor centralizado para la información de la derecha */
+        .section-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
         .section-title { font-size: 2.8rem; margin-bottom: 3.5rem; letter-spacing: 1px; text-align: left; font-weight: 400; position: relative; z-index: 2;}
         .section-title::after { content: ''; display: block; width: 45px; height: 1px; background-color: var(--accent-blue); margin-top: 20px; transition: width 0.6s ease; }
-        section:hover .section-title::after { width: 70px; }
+        .section-container:hover .section-title::after { width: 70px; }
 
         /* --- DISEÑO EDITORIAL --- */
         .clean-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
         .clean-layout.reverse { grid-template-columns: 1fr 1fr; }
         .text-block { display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
-        /* CONTENEDOR DE FOTOS EDITORIAL */
+        /* CONTENEDOR DE FOTOS INTERACTIVO */
+        .photo-col { width: 100%; display: flex; justify-content: center; }
         .photo-frame {
-            width: 100%; height: 650px; background-color: var(--bg-placeholder); border-radius: 6px;
+            width: 100%; max-width: 440px; aspect-ratio: 4 / 5;
+            background-color: var(--bg-placeholder); border-radius: 6px;
             overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1;
+            z-index: 1; margin: 0 auto; cursor: pointer; /* Indica que es interactivo */
         }
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease; filter: contrast(1.05) brightness(0.95); }
-        .photo-frame:hover img { transform: scale(1.05); filter: contrast(1.1) brightness(1.05); }
-        .photo-frame::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inset 0 0 40px rgba(0,0,0,0.4); pointer-events: none; }
+        
+        .photo-frame img { 
+            width: 100%; height: 100%; object-fit: cover; object-position: center 15%; 
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease; 
+            filter: grayscale(100%) contrast(1.05) brightness(0.95);
+            transform: scale(1.05); 
+        }
+        .photo-frame::after { 
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+            background: inset 0 0 40px rgba(0,0,0,0.4); pointer-events: none; transition: background 1s ease;
+        }
+        
+        /* Efecto Hover en PC */
+        @media (hover: hover) {
+            .photo-frame:hover img { transform: scale(1); filter: grayscale(0%) contrast(1.1) brightness(1.05); }
+            .photo-frame:hover::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
+        }
+        
+        /* Efecto Táctil en Móvil (Se activa con JS al tocar) */
+        .photo-frame.is-touched img { transform: scale(1); filter: grayscale(0%) contrast(1.1) brightness(1.05); }
+        .photo-frame.is-touched::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
 
         /* --- HERO SECCIÓN (CARRUSEL) --- */
         #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh;}
@@ -244,8 +297,8 @@
             /* Logo compacto en móvil para evitar que se rompa el nombre largo */
             .brand-container { flex-direction: row; width: auto; align-items: center; gap: 6px; margin: 0; }
             .brand-signature { border: none; padding: 0; margin: 0; background: transparent; display: flex; align-items: baseline; white-space: nowrap;}
-            .signature-first { font-size: 0.95rem; display: inline-block; letter-spacing: 1px; }
-            .signature-last { font-size: 0.85rem; display: inline-block; margin-left: 4px; }
+            .signature-first { font-size: 1rem; display: inline-block; letter-spacing: 1px; }
+            .signature-last { font-size: 1.1rem; display: inline-block; margin-left: 4px; }
             .brand-subtitle { display: none; }
 
             /* Menú Hamburguesa Visible */
@@ -255,15 +308,18 @@
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
             /* Menú de Navegación Desplegable */
-            nav {
-                position: absolute; top: var(--header-mobile-height); left: 0; width: 100%;
+            nav.mobile-overlay {
+                display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100%;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
-                padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+                padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
+                box-shadow: 0 15px 30px rgba(0,0,0,0.6); z-index: 1999; flex-direction: column;
             }
-            nav.open { max-height: 500px; padding: 2rem 0; }
-            nav ul { gap: 1.8rem; }
-            nav a { font-size: 0.75rem; letter-spacing: 5px; }
+            nav.mobile-overlay.open { max-height: 500px; padding: 2rem 0; }
+            nav.mobile-overlay ul { gap: 1.8rem; list-style: none; display: flex; flex-direction: column; text-align: center; width: 100%; margin-bottom: 2rem;}
+            nav.mobile-overlay a { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; display: block;}
+            nav.mobile-overlay a:hover, nav.mobile-overlay a.active { color: var(--accent-blue); font-weight: 500;}
+            
+            .mobile-lang { display: flex; justify-content: center; gap: 10px; width: 100%;}
 
             /* Ajustes Generales de la Vista */
             main { margin-left: 0; width: 100%; margin-top: 0; }
@@ -271,8 +327,8 @@
             #inicio { height: 100vh; padding-top: var(--header-mobile-height); }
             
             /* Cuadrículas adaptadas para móvil: FOTO ARRIBA, TEXTO ABAJO */
-            .clean-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-            .clean-layout .photo-frame { order: 1; }
+            .clean-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .clean-layout .photo-frame { order: 1; margin: 0 auto; max-width: 100%;}
             .clean-layout .text-block { order: 2; }
             
             .clean-layout.reverse { grid-template-columns: 1fr; }
@@ -293,14 +349,14 @@
 
         /* --- OPTIMIZACIÓN EXTREMA PARA CELULARES PEQUEÑOS --- */
         @media (max-width: 768px) {
-            section { padding: 4.5rem 5%; }
             .section-title { font-size: 2.2rem; margin-bottom: 2rem; text-align: left; }
             .section-title::after { margin: 15px 0 0 0; }
             
             /* Ajuste extra de logo para teléfonos muy finos (iPhone SE) */
             @media (max-width: 375px) {
                 aside { padding: 0 1rem; }
-                .signature-first { font-size: 0.85rem; letter-spacing: 0.5px; }
+                .signature-first { font-size: 0.95rem; letter-spacing: 0.5px; }
+                .signature-last { font-size: 1rem; }
                 .loader-text { font-size: 0.65rem; letter-spacing: 2px; }
             }
 
@@ -315,7 +371,6 @@
             .text-block p { font-size: 1rem; text-align: left; }
             
             .testimonial-card { padding: 2.5rem 1.5rem; text-align: left; }
-            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 1rem; opacity: 0.5;}
             .testimonial-card p.quote { font-size: 1.05rem; }
 
             /* Lista adaptada */
@@ -352,7 +407,8 @@
             <span class="brand-subtitle" data-i18n="subtitle">Trompeta Clásica</span>
         </a>
         
-        <nav id="mobile-nav">
+        <!-- NAV ESCRITORIO -->
+        <nav class="desktop-nav">
             <ul>
                 <li><a href="#inicio" class="nav-link" data-i18n="nav-home">Inicio</a></li>
                 <li><a href="#biografia" class="nav-link" data-i18n="nav-bio">Biografía</a></li>
@@ -360,19 +416,20 @@
                 <li><a href="#repertorio" class="nav-link" data-i18n="nav-repertoire">Repertorio</a></li>
                 <li><a href="#contacto" class="nav-link" data-i18n="nav-contact">Contacto</a></li>
             </ul>
-            <!-- Selector de idioma integrado al menú en móviles -->
-            <div class="language-switcher">
-                <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-                <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
-                <span class="lang-divider">/</span>
-                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
-                <span class="lang-divider">/</span>
-                <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-            </div>
         </nav>
+
+        <!-- SELECTOR DE IDIOMA ORIGINAL (ESCRITORIO) -->
+        <div class="language-switcher">
+            <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+            <span class="lang-divider">/</span>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <span class="lang-divider">/</span>
+            <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+        </div>
 
         <!-- Botón de Hamburguesa Exclusivo para Móviles -->
         <div class="menu-toggle" id="menu-btn">
@@ -381,6 +438,28 @@
             <span></span>
         </div>
     </aside>
+
+    <!-- MENÚ DESPLEGABLE MÓVIL -->
+    <nav class="mobile-overlay" id="mobile-nav">
+        <ul>
+            <li><a href="#inicio" class="nav-link" data-i18n="nav-home">Inicio</a></li>
+            <li><a href="#biografia" class="nav-link" data-i18n="nav-bio">Biografía</a></li>
+            <li><a href="#testimonios" class="nav-link" data-i18n="nav-awards">Reconocimientos</a></li>
+            <li><a href="#repertorio" class="nav-link" data-i18n="nav-repertoire">Repertorio</a></li>
+            <li><a href="#contacto" class="nav-link" data-i18n="nav-contact">Contacto</a></li>
+        </ul>
+        <div class="language-switcher mobile-lang">
+            <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+            <span class="lang-divider">/</span>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <span class="lang-divider">/</span>
+            <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+        </div>
+    </nav>
 
     <main>
         <!-- 1. INICIO (SLIDESHOW) -->
@@ -417,25 +496,26 @@
 
         <!-- 2. BIOGRAFÍA -->
         <section id="biografia">
-            <h2 class="section-title reveal" data-i18n="bio-title">Trayectoria</h2>
-            
-            <div class="clean-layout reveal">
-                <!-- En móvil esto se pondrá arriba automáticamente por la clase clean-layout -->
-                <div class="photo-frame">
-                    <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
-                </div>
+            <div class="section-container">
+                <h2 class="section-title reveal" data-i18n="bio-title">Trayectoria</h2>
+                
+                <div class="clean-layout reveal">
+                    <div class="photo-frame touch-photo">
+                        <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
+                    </div>
 
-                <div class="text-block">
-                    <p data-i18n="bio-p1">Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.</p>
-                    <span class="sr-only"></span>
-                    <p data-i18n="bio-p2">Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.</p>
-                    <span class="sr-only"></span>
-                    <p data-i18n="bio-p3">Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.</p>
-                    <span class="sr-only"></span>
-                    
-                    <div class="highlight-box">
-                        <h4 data-i18n="bio-box-title">Trompetista Solista | Orquesta Nacional de Lyon</h4>
-                        <p data-i18n="bio-box-p">Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.</p>
+                    <div class="text-block">
+                        <p data-i18n="bio-p1">Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.</p>
+                        <span class="sr-only"></span>
+                        <p data-i18n="bio-p2">Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.</p>
+                        <span class="sr-only"></span>
+                        <p data-i18n="bio-p3">Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.</p>
+                        <span class="sr-only"></span>
+                        
+                        <div class="highlight-box">
+                            <h4 data-i18n="bio-box-title">Trompetista Solista | Orquesta Nacional de Lyon</h4>
+                            <p data-i18n="bio-box-p">Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -452,50 +532,54 @@
 
         <!-- 3. TESTIMONIOS -->
         <section id="testimonios">
-            <h2 class="section-title reveal" data-i18n="awards-title">Reconocimientos</h2>
-            <div class="testimonial-grid reveal">
-                <div class="testimonial-card">
-                    <p class="quote">"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right."</p>
-                    <span class="sr-only"></span>
-                    <h4>Gustavo Dudamel</h4>
-                    <span data-i18n="dudamel-title">Music Director, LA Phil / New York Philharmonic</span>
-                </div>
-                <div class="testimonial-card">
-                    <p class="quote" data-i18n="quote-2">"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa."</p>
-                    <span class="sr-only"></span>
-                    <h4>Pacho Flores</h4>
-                    <span data-i18n="quote-2-sub">Solista Internacional</span>
+            <div class="section-container">
+                <h2 class="section-title reveal" data-i18n="awards-title">Reconocimientos</h2>
+                <div class="testimonial-grid reveal">
+                    <div class="testimonial-card">
+                        <p class="quote">"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right."</p>
+                        <span class="sr-only"></span>
+                        <h4>Gustavo Dudamel</h4>
+                        <span data-i18n="dudamel-title">Music Director, LA Phil / New York Philharmonic</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="quote" data-i18n="quote-2">"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa."</p>
+                        <span class="sr-only"></span>
+                        <h4>Pacho Flores</h4>
+                        <span data-i18n="quote-2-sub">Solista Internacional</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 4. REPERTORIO -->
         <section id="repertorio">
-            <h2 class="section-title reveal" data-i18n="rep-title">Repertorio Destacado</h2>
-            
-            <div class="clean-layout reverse reveal">
-                <div class="photo-frame">
-                    <img src="foto.4.JPG" alt="Eugenio Carreño en presentación" onerror="this.style.display='none'">
-                </div>
+            <div class="section-container">
+                <h2 class="section-title reveal" data-i18n="rep-title">Repertorio Destacado</h2>
                 
-                <div class="text-block">
-                    <div class="repertorio-list">
-                        <a href="https://youtu.be/LZIjKl7xqRA" target="_blank" class="repertorio-item">
-                            <h4>Arutunian Trumpet Concerto</h4>
-                            <span data-i18n="rep-action">Ver Interpretación ➔</span>
-                        </a>
-                        <a href="https://youtu.be/-90YWfgcWB8" target="_blank" class="repertorio-item">
-                            <h4>Haydn Trumpet Concerto</h4>
-                            <span data-i18n="rep-action">Ver Interpretación ➔</span>
-                        </a>
-                        <a href="https://youtu.be/D2ofiZRtCKI" target="_blank" class="repertorio-item">
-                            <h4>Trumpet Selection</h4>
-                            <span data-i18n="rep-action">Ver Interpretación ➔</span>
-                        </a>
-                        <a href="https://youtu.be/bzucZ-nNCN4" target="_blank" class="repertorio-item">
-                            <h4>Sr Jou Pablo Camacaro</h4>
-                            <span data-i18n="rep-action">Ver Interpretación ➔</span>
-                        </a>
+                <div class="clean-layout reverse reveal">
+                    <div class="photo-frame touch-photo">
+                        <img src="foto.4.JPG" alt="Eugenio Carreño en presentación" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="text-block">
+                        <div class="repertorio-list">
+                            <a href="https://youtu.be/LZIjKl7xqRA" target="_blank" class="repertorio-item">
+                                <h4>Arutunian Trumpet Concerto</h4>
+                                <span data-i18n="rep-action">Ver Interpretación ➔</span>
+                            </a>
+                            <a href="https://youtu.be/-90YWfgcWB8" target="_blank" class="repertorio-item">
+                                <h4>Haydn Trumpet Concerto</h4>
+                                <span data-i18n="rep-action">Ver Interpretación ➔</span>
+                            </a>
+                            <a href="https://youtu.be/D2ofiZRtCKI" target="_blank" class="repertorio-item">
+                                <h4>Trumpet Selection</h4>
+                                <span data-i18n="rep-action">Ver Interpretación ➔</span>
+                            </a>
+                            <a href="https://youtu.be/bzucZ-nNCN4" target="_blank" class="repertorio-item">
+                                <h4>Sr Jou Pablo Camacaro</h4>
+                                <span data-i18n="rep-action">Ver Interpretación ➔</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -503,42 +587,44 @@
 
         <!-- 5. CONTACTO -->
         <section id="contacto">
-            <h2 class="section-title reveal" data-i18n="contact-title">Contacto</h2>
-            
-            <div class="clean-layout reveal">
-                <div class="photo-frame">
-                    <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
-                </div>
+            <div class="section-container">
+                <h2 class="section-title reveal" data-i18n="contact-title">Contacto</h2>
+                
+                <div class="clean-layout reveal">
+                    <div class="photo-frame touch-photo">
+                        <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
+                    </div>
 
-                <div class="contact-content">
-                    <p data-i18n="contact-p">Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.</p>
-                    
-                    <div class="contact-grid">
-                        <a href="mailto:eacarrenogomez@gmail.com" class="contact-card">
-                            <div>
-                                <div class="contact-card-type" data-i18n="contact-c1-type">Booking & Management</div>
-                                <div class="contact-card-value">eacarrenogomez@gmail.com</div>
-                            </div>
-                            <div class="contact-card-action" data-i18n="contact-c1-act">Enviar Correo ➔</div>
-                        </a>
+                    <div class="contact-content text-block">
+                        <p data-i18n="contact-p">Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.</p>
+                        
+                        <div class="contact-grid">
+                            <a href="mailto:eacarrenogomez@gmail.com" class="contact-card">
+                                <div>
+                                    <div class="contact-card-type" data-i18n="contact-c1-type">Booking & Management</div>
+                                    <div class="contact-card-value">eacarrenogomez@gmail.com</div>
+                                </div>
+                                <div class="contact-card-action" data-i18n="contact-c1-act">Enviar Correo ➔</div>
+                            </a>
 
-                        <a href="tel:+33745652218" class="contact-card">
-                            <div>
-                                <div class="contact-card-type" data-i18n="contact-c2-type">Direct Line</div>
-                                <div class="contact-card-value">+33 (7) 45 65 22 18</div>
-                                <span class="sr-only"></span>
-                            </div>
-                            <div class="contact-card-action" data-i18n="contact-c2-act">Llamar Ahora ➔</div>
-                        </a>
+                            <a href="tel:+33745652218" class="contact-card">
+                                <div>
+                                    <div class="contact-card-type" data-i18n="contact-c2-type">Direct Line</div>
+                                    <div class="contact-card-value">+33 (7) 45 65 22 18</div>
+                                    <span class="sr-only"></span>
+                                </div>
+                                <div class="contact-card-action" data-i18n="contact-c2-act">Llamar Ahora ➔</div>
+                            </a>
 
-                        <a href="https://instagram.com/eugeniocarrenojr" target="_blank" class="contact-card">
-                            <div>
-                                <div class="contact-card-type">Instagram</div>
-                                <div class="contact-card-value">@eugeniocarrenojr</div>
-                                <span class="sr-only"></span>
-                            </div>
-                            <div class="contact-card-action" data-i18n="contact-c3-act">Visitar Perfil ➔</div>
-                        </a>
+                            <a href="https://instagram.com/eugeniocarrenojr" target="_blank" class="contact-card">
+                                <div>
+                                    <div class="contact-card-type">Instagram</div>
+                                    <div class="contact-card-value">@eugeniocarrenojr</div>
+                                    <span class="sr-only"></span>
+                                </div>
+                                <div class="contact-card-action" data-i18n="contact-c3-act">Visitar Perfil ➔</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -552,7 +638,7 @@
 
     <!-- SCRIPTS MÓVILES, ANIMACIONES Y TRADUCCIONES -->
     <script>
-        // Restauración de scroll manual (Para siempre iniciar arriba al cargar)
+        // Restauración de scroll manual
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
 
         // --- MANEJO DEL MENÚ MÓVIL (HAMBURGUESA) ---
@@ -564,13 +650,32 @@
             mobileNav.classList.toggle('open');
         });
 
-        // Cerrar menú al hacer clic en un enlace (Solo en móvil)
+        // Cerrar menú al hacer clic en un enlace
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if(window.innerWidth <= 1024) {
                     menuBtn.classList.remove('active');
                     mobileNav.classList.remove('open');
                 }
+            });
+        });
+
+        // --- EFECTO TÁCTIL EN FOTOS PARA CELULARES ---
+        const touchPhotos = document.querySelectorAll('.touch-photo');
+        touchPhotos.forEach(photo => {
+            // Al tocar se añade la clase
+            photo.addEventListener('touchstart', () => {
+                photo.classList.add('is-touched');
+            }, {passive: true});
+            
+            // Al soltar el dedo se quita la clase
+            photo.addEventListener('touchend', () => {
+                photo.classList.remove('is-touched');
+            });
+            
+            // Si desliza fuera de la foto también se quita
+            photo.addEventListener('touchcancel', () => {
+                photo.classList.remove('is-touched');
             });
         });
 
@@ -588,7 +693,7 @@
             setTimeout(hideSplash, 400); 
         });
         window.addEventListener('load', () => { setTimeout(hideSplash, 100); });
-        setTimeout(hideSplash, 2000); // Fail-safe (Tiempo máximo de carga)
+        setTimeout(hideSplash, 2000); 
 
         // --- SLIDESHOW DEL HERO ---
         let currentSlideIndex = 0;
@@ -693,12 +798,15 @@
 
         function setLanguage(lang) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            // Activar todos los botones correspondientes
+            document.querySelectorAll(`.lang-btn[onclick="setLanguage('${lang}')"]`).forEach(btn => btn.classList.add('active'));
+            
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
             document.getElementById('page-title').innerText = translations[lang].pageTitle;
+            
             // Cerrar menú móvil al seleccionar idioma
             if(window.innerWidth <= 1024) {
                 menuBtn.classList.remove('active');
@@ -712,7 +820,6 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                // Reveal anticipado en móvil para mayor fluidez
                 var elementVisible = window.innerWidth <= 768 ? 50 : 120; 
                 if (elementTop < windowHeight - elementVisible) { reveals[i].classList.add("active"); }
             }
