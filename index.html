@@ -22,7 +22,7 @@
             --header-mobile-height: 75px;
         }
 
-        /* RESET PROFESIONAL (Corrige el espacio a la derecha) */
+        /* RESET PROFESIONAL */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
@@ -46,7 +46,6 @@
             font-family: 'Montserrat', sans-serif; line-height: 1.8; display: flex;
             flex-direction: column; font-weight: 300; letter-spacing: 0.3px;
             min-height: 100vh;
-            min-height: 100dvh; /* Soporte nativo Android/iOS para altura de pantalla real */
         }
 
         @media (min-width: 1025px) { body { flex-direction: row; } }
@@ -69,12 +68,12 @@
         @keyframes drop { 0% { top: -50%; } 100% { top: 150%; } }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
+        /* --- SIDEBAR IZQUIERDO (ESCRITORIO - TU DISEÑO ORIGINAL EXACTO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
             position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; padding: 2.5rem 1.5rem; border-right: 1px solid rgba(255, 255, 255, 0.03);
-            z-index: 2000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            z-index: 1000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
         }
 
         .sidebar-inner {
@@ -82,13 +81,16 @@
             width: 100%; height: 100%; justify-content: space-between;
         }
 
-        /* --- LOGO UNIFICADO EN UNA SOLA LÍNEA --- */
-        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; margin-bottom: 2rem; }
+        .sidebar-top { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .sidebar-bottom { width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+        /* LOGO UNIFICADO EN UNA SOLA LÍNEA */
+        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; }
         .brand-signature { 
             display: flex; align-items: baseline; justify-content: center; gap: 6px;
             padding: 1.2rem 0.5rem; width: 100%; 
             border-top: 1px solid rgba(100, 149, 237, 0.15); border-bottom: 1px solid rgba(100, 149, 237, 0.15); 
-            transition: var(--transition-luxury); 
+            margin-bottom: 1rem; transition: var(--transition-luxury); 
             white-space: nowrap; 
         }
         .brand-container:hover .brand-signature { border-color: var(--accent-blue); background-color: var(--accent-blue-glow); }
@@ -97,11 +99,11 @@
         .brand-container:hover .signature-first { color: var(--accent-blue); }
         .brand-container:hover .signature-last { color: #ffffff; }
         
-        .brand-subtitle { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 1rem; transition: var(--transition-smooth); display: block; }
+        .brand-subtitle { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 0.5rem; transition: var(--transition-smooth); display: block; }
         .brand-container:hover .brand-subtitle { color: #ffffff; }
 
         /* BOTÓN DE MENÚ (OCULTO EN ESCRITORIO) */
-        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px; flex-shrink: 0; }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px; }
         .menu-toggle span { width: 28px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px; display: block; }
 
         /* NAVEGACIÓN LATERAL (ESCRITORIO) */
@@ -124,7 +126,7 @@
         .lang-btn.active { color: var(--accent-blue); }
         .lang-divider { color: rgba(255, 255, 255, 0.1); font-size: 0.6rem; }
 
-        .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; position: relative; z-index: 1; width: 100%; }
+        .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; }
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
         /* NAV MÓVIL (OCULTO EN ESCRITORIO) */
@@ -187,8 +189,8 @@
         .photo-frame.is-touched img { transform: scale(1); filter: grayscale(0%) contrast(1.1) brightness(1.05); }
         .photo-frame.is-touched::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
 
-        /* --- HERO SECCIÓN --- */
-        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh; height: 100dvh;}
+        /* --- HERO SECCIÓN (CARRUSEL) --- */
+        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh;}
         .hero-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-placeholder); z-index: 0; pointer-events: none; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; background-position: center 25%; opacity: 0; transform: scale(1.05); transition: opacity 1.5s ease, transform 8s linear; }
         .hero-slide.active { opacity: 1; transform: scale(1); }
@@ -289,10 +291,9 @@
         /* ========================================================================= */
         
         @media (max-width: 1024px) {
-            /* Transformación del Sidebar a Header Fijo Superior (Compatible con Android y Apple) */
+            /* Transformación del Sidebar a Header Fijo Superior */
             aside {
                 width: 100%; height: var(--header-mobile-height); flex-direction: row; padding: 0 1.5rem;
-                justify-content: space-between; align-items: center;
                 border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                 background: rgba(13, 18, 29, 0.98); backdrop-filter: blur(10px);
                 z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -306,27 +307,27 @@
             /* Ocultar Navegación Escritorio */
             nav.desktop-nav { display: none; }
 
-            /* Logo compacto en móvil */
+            /* Logo compacto en móvil para evitar que se rompa el nombre largo */
             .brand-container { flex-direction: row; width: auto; align-items: center; gap: 6px; margin: 0; }
             .brand-signature { border: none; padding: 0; margin: 0; background: transparent; display: flex; align-items: baseline; white-space: nowrap;}
             .signature-first { font-size: 0.95rem; display: inline-block; letter-spacing: 1px; }
             .signature-last { font-size: 0.85rem; display: inline-block; margin-left: 4px; }
             .brand-subtitle { display: none; }
 
-            /* Menú Hamburguesa Visible */
+            /* Menú Hamburguesa Visible (3 rayitas) */
             .menu-toggle { display: flex; }
             .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Menú de Navegación Desplegable Móvil */
+            /* Menú de Navegación Desplegable Móvil (Compatible con Android y Apple) */
             nav.mobile-overlay {
-                display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100%;
+                display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100vw;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
                 padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
                 box-shadow: 0 15px 30px rgba(0,0,0,0.6); z-index: 1999; flex-direction: column;
             }
-            nav.mobile-overlay.open { max-height: 500px; padding: 2rem 0; }
+            nav.mobile-overlay.open { max-height: calc(100vh - var(--header-mobile-height)); padding: 2rem 0; overflow-y: auto; }
             nav.mobile-overlay ul { gap: 1.8rem; list-style: none; display: flex; flex-direction: column; text-align: center; width: 100%; margin-bottom: 2rem;}
             nav.mobile-overlay a { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; display: block;}
             nav.mobile-overlay a:hover, nav.mobile-overlay a.active { color: var(--accent-blue); font-weight: 500;}
@@ -336,7 +337,7 @@
             /* Ajustes Generales de la Vista */
             main { margin-left: 0; width: 100%; margin-top: 0; }
             section { padding: 5rem 6%; min-height: auto; }
-            #inicio { height: 100vh; height: 100dvh; padding-top: var(--header-mobile-height); }
+            #inicio { height: 100vh; padding-top: var(--header-mobile-height); }
             
             /* Cuadrículas adaptadas para móvil: FOTO ARRIBA, TEXTO ABAJO */
             .clean-layout { grid-template-columns: 1fr; gap: 3rem; }
@@ -750,7 +751,7 @@
                 "hero-p": "Forjado en El Sistema de Venezuela y perfeccionado en el Conservatorio Nacional Superior de París. Una técnica sinfónica de altísimo nivel, consolidada al asumir como trompetista solista de la prestigiosa Orquesta Nacional de Lyon.",
                 "btn-works": "Explorar Obras", "btn-booking": "Solicitar Booking",
                 "bio-title": "Trayectoria",
-                "bio-p1": "Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.",
+                "bio-p1": "Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en Festival de Salzburgo (2013) y de Gustavo Dudamel.",
                 "bio-p2": "Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.",
                 "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
                 "bio-box-title": "Trompetista Solista | Orquesta Nacional de Lyon",
@@ -772,9 +773,12 @@
                 pageTitle: "Eugenio Carreño Jr. | Solo Trumpeter",
                 subtitle: "Classical Trumpet",
                 "nav-home": "Home", "nav-bio": "Biography", "nav-awards": "Recognitions", "nav-repertoire": "Repertoire", "nav-contact": "Contact",
-                "hero-pre": "International Soloist", "hero-h1-1": "The art of sound", "hero-h1-2": "and orchestration.",
+                "hero-pre": "International Soloist",
+                "hero-h1-1": "The art of sound",
+                "hero-h1-2": "and orchestration.",
                 "hero-p": "Forged in El Sistema of Venezuela and perfected at the National Superior Conservatory of Paris. A symphonic technique of the highest level, consolidated upon taking up the position of solo trumpet of the prestigious Orchestre National de Lyon.",
-                "btn-works": "Explore Works", "btn-booking": "Request Booking",
+                "btn-works": "Explore Works",
+                "btn-booking": "Request Booking",
                 "bio-title": "Biography",
                 "bio-p1": "Born in Caracas in 2001, he began his musical training in the National System of Youth and Children's Orchestras of Venezuela. His virtuosity quickly led him to the National Children's Symphony Orchestra of Venezuela, performing under the baton of Sir Simon Rattle at the 2013 Salzburg Festival and Gustavo Dudamel.",
                 "bio-p2": "He has participated in prestigious festivals in Austria, Italy, and Greece with the Venezuelan Brass Ensemble, refining his technique in exclusive masterclasses with instrument legends such as David Guerrier, Eric Aubier, and Pacho Flores.",
@@ -787,20 +791,31 @@
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
                 "quote-2": "\"Young Carreño possesses great technical mastery and, above all, a Great Musical Heart. His interpretive approach aims at deep respect for music, conveyed through clear and precise performance.\"",
                 "quote-2-sub": "International Soloist",
-                "rep-title": "Featured Repertoire", "rep-action": "Watch Performance ➔",
-                "contact-title": "Contact", "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
-                "contact-c1-type": "Booking & Management", "contact-c1-act": "Send Email ➔",
-                "contact-c2-type": "Direct Line", "contact-c2-act": "Call Now ➔",
+                "rep-title": "Featured Repertoire",
+                "rep-action": "Watch Performance ➔",
+                "contact-title": "Contact",
+                "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
+                "contact-c1-type": "Booking & Management",
+                "contact-c1-act": "Send Email ➔",
+                "contact-c2-type": "Direct Line",
+                "contact-c2-act": "Call Now ➔",
                 "contact-c3-act": "Visit Profile ➔",
                 "footer-rights": "&copy; 2026 Eugenio Carreño Jr. All rights reserved."
             },
             fr: {
                 pageTitle: "Eugenio Carreño Jr. | Trompettiste Soliste",
                 subtitle: "Trompette Classique",
-                "nav-home": "Accueil", "nav-bio": "Biographie", "nav-awards": "Reconnaissances", "nav-repertoire": "Répertoire", "nav-contact": "Contact",
-                "hero-pre": "Soliste International", "hero-h1-1": "L'art du son", "hero-h1-2": "et de l'orchestration.",
+                "nav-home": "Accueil",
+                "nav-bio": "Biographie",
+                "nav-awards": "Reconnaissances",
+                "nav-repertoire": "Répertoire",
+                "nav-contact": "Contact",
+                "hero-pre": "Soliste International",
+                "hero-h1-1": "L'art du son",
+                "hero-h1-2": "et de l'orchestration.",
                 "hero-p": "Formé au sein d'El Sistema au Venezuela et perfectionné au Conservatoire National Supérieur de Musique et de Danse de Paris. Une technique symphonique de haut niveau, consolidée en occupant le poste de trompette solo au sein de la prestigieuse Orchestre National de Lyon.",
-                "btn-works": "Explorer les Œuvres", "btn-booking": "Demander un Booking",
+                "btn-works": "Explorer les Œuvres",
+                "btn-booking": "Demander un Booking",
                 "bio-title": "Parcours",
                 "bio-p1": "Né à Caracas en 2001, il débute sa formation musicale au sein du Système National des Orchestres Juvéniles et Infantiles du Venezuela. Sa virtuosité l'amène rapidement à intégrer l'Orchestre Symphonique National Infantil du Venezuela, se produisant sous la direction de Sir Simon Rattle au Festival de Salzbourg 2013 et de Gustavo Dudamel.",
                 "bio-p2": "Il a participé à d'importants festivals en Autriche, en Italie et en Grèce avec l'Ensemble de Cuivres du Venezuela, perfectionnant sa technique lors de masterclasses exclusives avec des maîtres tels que David Guerrier, Eric Aubier et Pacho Flores.",
@@ -808,15 +823,19 @@
                 "bio-box-title": "Trompette Solo | Orchestre National de Lyon",
                 "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre National de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
                 "parallax-quote": "\"La musique est l'architecture du son, et la trompette, sa voix la plus brillante.\"",
-                "parallax-sub": "Passion et Discipline Symphonique",
+                "parallax-sub": "Passion et Discipline Sinfónica",
                 "awards-title": "Distinctions",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
-                "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interprétative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
-                "quote-2-sub": "Solista International",
-                "rep-title": "Répertoire Phare", "rep-action": "Voir la Vidéo ➔",
-                "contact-title": "Contact", "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
-                "contact-c1-type": "Booking & Management", "contact-c1-act": "Envoyer un Email ➔",
-                "contact-c2-type": "Ligne Directe", "contact-c2-act": "Appeler Maintenant ➔",
+                "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interpretative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
+                "quote-2-sub": "Soliste International",
+                "rep-title": "Répertoire Phare",
+                "rep-action": "Voir la Vidéo ➔",
+                "contact-title": "Contact",
+                "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
+                "contact-c1-type": "Booking & Management",
+                "contact-c1-act": "Envoyer un Email ➔",
+                "contact-c2-type": "Ligne Directe",
+                "contact-c2-act": "Appeler Maintenant ➔",
                 "contact-c3-act": "Visiter le Profil ➔",
                 "footer-rights": "&copy; 2026 Eugenio Carreño Jr. Tous droits réservés."
             }
@@ -824,7 +843,6 @@
 
         function setLanguage(lang) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            // Activar todos los botones correspondientes
             document.querySelectorAll(`.lang-btn[onclick="setLanguage('${lang}')"]`).forEach(btn => btn.classList.add('active'));
             
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -833,7 +851,6 @@
             });
             document.getElementById('page-title').innerText = translations[lang].pageTitle;
             
-            // Cerrar menú móvil al seleccionar idioma
             if(window.innerWidth <= 1024) {
                 menuBtn.classList.remove('active');
                 mobileNav.classList.remove('open');
