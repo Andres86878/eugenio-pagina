@@ -31,7 +31,7 @@
             scrollbar-color: var(--accent-blue) var(--bg-dark);
             overflow-x: hidden;
             width: 100%;
-            max-width: 100%; /* Esto elimina la barra de scroll y el espacio extra */
+            max-width: 100%;
         }
 
         /* EFECTO DE GRANO CINEMATOGRÁFICO SUTIL */
@@ -46,6 +46,7 @@
             font-family: 'Montserrat', sans-serif; line-height: 1.8; display: flex;
             flex-direction: column; font-weight: 300; letter-spacing: 0.3px;
             min-height: 100vh;
+            min-height: 100dvh; /* Soporte nativo Android/iOS para altura de pantalla real */
         }
 
         @media (min-width: 1025px) { body { flex-direction: row; } }
@@ -71,25 +72,24 @@
         /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
-            position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center;
+            position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; padding: 2.5rem 1.5rem; border-right: 1px solid rgba(255, 255, 255, 0.03);
-            z-index: 1000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-            overflow: hidden;
+            z-index: 2000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
         }
-        
+
         .sidebar-inner {
             display: flex; flex-direction: column; align-items: center; 
             width: 100%; height: 100%; justify-content: space-between;
         }
 
-        /* LOGO CORREGIDO: Eugenio Carreño y Jr juntos en la misma línea */
-        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; margin-bottom: 2rem;}
+        /* --- LOGO UNIFICADO EN UNA SOLA LÍNEA --- */
+        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; margin-bottom: 2rem; }
         .brand-signature { 
             display: flex; align-items: baseline; justify-content: center; gap: 6px;
             padding: 1.2rem 0.5rem; width: 100%; 
             border-top: 1px solid rgba(100, 149, 237, 0.15); border-bottom: 1px solid rgba(100, 149, 237, 0.15); 
             transition: var(--transition-luxury); 
-            white-space: nowrap; /* Evita que el Jr. se vaya a la línea de abajo */
+            white-space: nowrap; 
         }
         .brand-container:hover .brand-signature { border-color: var(--accent-blue); background-color: var(--accent-blue-glow); }
         .signature-first { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; color: #ffffff; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition-smooth); }
@@ -101,8 +101,8 @@
         .brand-container:hover .brand-subtitle { color: #ffffff; }
 
         /* BOTÓN DE MENÚ (OCULTO EN ESCRITORIO) */
-        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px; }
-        .menu-toggle span { width: 28px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px; }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px; flex-shrink: 0; }
+        .menu-toggle span { width: 28px; height: 2px; background-color: var(--accent-blue); transition: var(--transition-smooth); border-radius: 2px; display: block; }
 
         /* NAVEGACIÓN LATERAL (ESCRITORIO) */
         nav.desktop-nav { width: 100%; margin: auto 0; position: relative; z-index: 1; }
@@ -115,8 +115,8 @@
         nav.desktop-nav a:hover, nav.desktop-nav a.active { color: #ffffff; }
         nav.desktop-nav a.active { color: var(--accent-blue); font-weight: 500; }
 
-        /* SELECTOR DE IDIOMA ORIGINAL Y ELEGANTE */
-        .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth); margin-top: 3rem;}
+        /* SELECTOR DE IDIOMA */
+        .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth);}
         .language-switcher:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(100, 149, 237, 0.3); }
         .lang-icon { width: 13px; height: 13px; color: var(--accent-blue); flex-shrink: 0; }
         .lang-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; padding: 2px 4px; transition: var(--transition-smooth); }
@@ -124,7 +124,7 @@
         .lang-btn.active { color: var(--accent-blue); }
         .lang-divider { color: rgba(255, 255, 255, 0.1); font-size: 0.6rem; }
 
-        .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; position: relative; z-index: 1; width: 100%;}
+        .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; position: relative; z-index: 1; width: 100%; }
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
         /* NAV MÓVIL (OCULTO EN ESCRITORIO) */
@@ -144,7 +144,6 @@
             width: 100%;
         }
         
-        /* Contenedor centralizado para la información de la derecha */
         .section-container {
             width: 100%;
             max-width: 1100px;
@@ -180,18 +179,16 @@
             background: inset 0 0 40px rgba(0,0,0,0.4); pointer-events: none; transition: background 1s ease;
         }
         
-        /* Efecto Hover en PC */
         @media (hover: hover) {
             .photo-frame:hover img { transform: scale(1); filter: grayscale(0%) contrast(1.1) brightness(1.05); }
             .photo-frame:hover::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
         }
         
-        /* Efecto Táctil en Móvil (Se activa con JS) */
         .photo-frame.is-touched img { transform: scale(1); filter: grayscale(0%) contrast(1.1) brightness(1.05); }
         .photo-frame.is-touched::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
 
-        /* --- HERO SECCIÓN (CARRUSEL) --- */
-        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh;}
+        /* --- HERO SECCIÓN --- */
+        #inicio { position: relative; overflow: hidden; align-items: flex-start; padding-top: 0; justify-content: center; height: 100vh; height: 100dvh;}
         .hero-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-placeholder); z-index: 0; pointer-events: none; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; background-position: center 25%; opacity: 0; transform: scale(1.05); transition: opacity 1.5s ease, transform 8s linear; }
         .hero-slide.active { opacity: 1; transform: scale(1); }
@@ -292,23 +289,24 @@
         /* ========================================================================= */
         
         @media (max-width: 1024px) {
-            /* Transformación del Sidebar a Header Fijo Superior */
+            /* Transformación del Sidebar a Header Fijo Superior (Compatible con Android y Apple) */
             aside {
                 width: 100%; height: var(--header-mobile-height); flex-direction: row; padding: 0 1.5rem;
-                justify-content: space-between; align-items: center; /* ESTO ARREGLA LAS 3 RAYITAS */
+                justify-content: space-between; align-items: center;
                 border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                 background: rgba(13, 18, 29, 0.98); backdrop-filter: blur(10px);
                 z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                position: fixed; top: 0; left: 0;
             }
             
-            .sidebar-inner { flex-direction: row; align-items: center; justify-content: space-between; width: 100%;}
-            .sidebar-top { padding: 0; width: auto;}
-            .sidebar-bottom { display: none;}
+            .sidebar-inner { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; height: 100%; }
+            .sidebar-top { padding: 0; width: auto; }
+            .sidebar-bottom { display: none; }
             
-            /* Ocultar Navegación de Escritorio */
+            /* Ocultar Navegación Escritorio */
             nav.desktop-nav { display: none; }
 
-            /* Logo compacto en móvil para evitar que se rompa el nombre largo */
+            /* Logo compacto en móvil */
             .brand-container { flex-direction: row; width: auto; align-items: center; gap: 6px; margin: 0; }
             .brand-signature { border: none; padding: 0; margin: 0; background: transparent; display: flex; align-items: baseline; white-space: nowrap;}
             .signature-first { font-size: 0.95rem; display: inline-block; letter-spacing: 1px; }
@@ -321,7 +319,7 @@
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Menú de Navegación Desplegable (Móvil) */
+            /* Menú de Navegación Desplegable Móvil */
             nav.mobile-overlay {
                 display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100%;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -333,13 +331,12 @@
             nav.mobile-overlay a { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; display: block;}
             nav.mobile-overlay a:hover, nav.mobile-overlay a.active { color: var(--accent-blue); font-weight: 500;}
             
-            /* Language Switcher en el menú móvil */
             .mobile-lang { display: flex; justify-content: center; gap: 10px; margin-top: 1rem; width: 100%;}
 
             /* Ajustes Generales de la Vista */
             main { margin-left: 0; width: 100%; margin-top: 0; }
             section { padding: 5rem 6%; min-height: auto; }
-            #inicio { height: 100vh; padding-top: var(--header-mobile-height); }
+            #inicio { height: 100vh; height: 100dvh; padding-top: var(--header-mobile-height); }
             
             /* Cuadrículas adaptadas para móvil: FOTO ARRIBA, TEXTO ABAJO */
             .clean-layout { grid-template-columns: 1fr; gap: 3rem; }
@@ -359,7 +356,7 @@
             .hero-dots { left: 50%; transform: translateX(-50%); bottom: 2rem; }
             
             .testimonial-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .parallax-banner { height: 40vh; background-attachment: scroll; /* Para iOS Safari */ }
+            .parallax-banner { height: 40vh; background-attachment: scroll; /* Para iOS Safari y Android */ }
         }
 
         /* --- OPTIMIZACIÓN EXTREMA PARA CELULARES PEQUEÑOS --- */
@@ -368,10 +365,10 @@
             .section-title { font-size: 2.2rem; margin-bottom: 2rem; text-align: left; }
             .section-title::after { margin: 15px 0 0 0; }
             
-            /* Ajuste extra de logo para teléfonos muy finos (iPhone SE) */
             @media (max-width: 375px) {
                 aside { padding: 0 1rem; }
-                .signature-first { font-size: 0.85rem; letter-spacing: 0.5px; }
+                .signature-first { font-size: 0.95rem; letter-spacing: 0.5px; }
+                .signature-last { font-size: 1rem; }
                 .loader-text { font-size: 0.65rem; letter-spacing: 2px; }
             }
 
@@ -386,7 +383,6 @@
             .text-block p { font-size: 1rem; text-align: left; }
             
             .testimonial-card { padding: 2.5rem 1.5rem; text-align: left; }
-            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 1rem; opacity: 0.5;}
             .testimonial-card p.quote { font-size: 1.05rem; }
 
             /* Lista adaptada */
@@ -671,7 +667,7 @@
 
     <!-- SCRIPTS MÓVILES, ANIMACIONES Y TRADUCCIONES -->
     <script>
-        // Restauración de scroll manual
+        // Restauración de scroll manual (Para siempre iniciar arriba al cargar)
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
 
         // --- MANEJO DEL MENÚ MÓVIL (HAMBURGUESA) ---
@@ -756,7 +752,7 @@
                 "bio-title": "Trayectoria",
                 "bio-p1": "Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.",
                 "bio-p2": "Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.",
-                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de París depuis 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
+                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
                 "bio-box-title": "Trompetista Solista | Orquesta Nacional de Lyon",
                 "bio-box-p": "Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.",
                 "parallax-quote": "\"La música es la arquitectura del sonido, y la trompeta, su voz más brillante.\"",
@@ -816,7 +812,7 @@
                 "awards-title": "Distinctions",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
                 "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interprétative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
-                "quote-2-sub": "Soliste International",
+                "quote-2-sub": "Solista International",
                 "rep-title": "Répertoire Phare", "rep-action": "Voir la Vidéo ➔",
                 "contact-title": "Contact", "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Envoyer un Email ➔",
@@ -836,6 +832,12 @@
                 if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
             document.getElementById('page-title').innerText = translations[lang].pageTitle;
+            
+            // Cerrar menú móvil al seleccionar idioma
+            if(window.innerWidth <= 1024) {
+                menuBtn.classList.remove('active');
+                mobileNav.classList.remove('open');
+            }
         }
 
         // --- EFECTOS DE SCROLL (REVEAL) ---
