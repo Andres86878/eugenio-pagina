@@ -22,7 +22,7 @@
             --header-mobile-height: 75px;
         }
 
-        /* RESET PROFESIONAL (Evita espacios y scroll horizontal) */
+        /* RESET PROFESIONAL (Corrige el espacio a la derecha) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
@@ -31,7 +31,7 @@
             scrollbar-color: var(--accent-blue) var(--bg-dark);
             overflow-x: hidden;
             width: 100%;
-            max-width: 100%;
+            max-width: 100%; /* Esto elimina la barra de scroll y el espacio extra */
         }
 
         /* EFECTO DE GRANO CINEMATOGRÁFICO SUTIL */
@@ -71,18 +71,24 @@
         /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
-            position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: space-between;
+            position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center;
             align-items: center; padding: 2.5rem 1.5rem; border-right: 1px solid rgba(255, 255, 255, 0.03);
             z-index: 1000; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        .sidebar-inner {
+            display: flex; flex-direction: column; align-items: center; 
+            width: 100%; height: 100%; justify-content: space-between;
         }
 
-        /* --- LOGO INCREÍBLE (UNIFICADO EN UNA SOLA LÍNEA) --- */
-        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; }
+        /* LOGO CORREGIDO: Eugenio Carreño y Jr juntos en la misma línea */
+        .brand-container { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; position: relative; z-index: 2; margin-bottom: 2rem;}
         .brand-signature { 
             display: flex; align-items: baseline; justify-content: center; gap: 6px;
             padding: 1.2rem 0.5rem; width: 100%; 
             border-top: 1px solid rgba(100, 149, 237, 0.15); border-bottom: 1px solid rgba(100, 149, 237, 0.15); 
-            margin-bottom: 1rem; transition: var(--transition-luxury);
+            transition: var(--transition-luxury); 
             white-space: nowrap; /* Evita que el Jr. se vaya a la línea de abajo */
         }
         .brand-container:hover .brand-signature { border-color: var(--accent-blue); background-color: var(--accent-blue-glow); }
@@ -91,7 +97,7 @@
         .brand-container:hover .signature-first { color: var(--accent-blue); }
         .brand-container:hover .signature-last { color: #ffffff; }
         
-        .brand-subtitle { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 0.5rem; transition: var(--transition-smooth); }
+        .brand-subtitle { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 1rem; transition: var(--transition-smooth); display: block; }
         .brand-container:hover .brand-subtitle { color: #ffffff; }
 
         /* BOTÓN DE MENÚ (OCULTO EN ESCRITORIO) */
@@ -110,7 +116,7 @@
         nav.desktop-nav a.active { color: var(--accent-blue); font-weight: 500; }
 
         /* SELECTOR DE IDIOMA ORIGINAL Y ELEGANTE */
-        .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth);}
+        .language-switcher { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 4px; position: relative; z-index: 1; margin-bottom: 0.5rem; transition: var(--transition-smooth); margin-top: 3rem;}
         .language-switcher:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(100, 149, 237, 0.3); }
         .lang-icon { width: 13px; height: 13px; color: var(--accent-blue); flex-shrink: 0; }
         .lang-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; padding: 2px 4px; transition: var(--transition-smooth); }
@@ -118,7 +124,7 @@
         .lang-btn.active { color: var(--accent-blue); }
         .lang-divider { color: rgba(255, 255, 255, 0.1); font-size: 0.6rem; }
 
-        .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; position: relative; z-index: 1; }
+        .sidebar-footer { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; position: relative; z-index: 1; width: 100%;}
         .sidebar-footer span::before { content: '•'; color: var(--accent-blue); margin-right: 6px; }
 
         /* NAV MÓVIL (OCULTO EN ESCRITORIO) */
@@ -160,7 +166,7 @@
             width: 100%; max-width: 440px; aspect-ratio: 4 / 5;
             background-color: var(--bg-placeholder); border-radius: 6px;
             overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1; margin: 0 auto; cursor: pointer; /* Indica que es interactivo */
+            z-index: 1; margin: 0 auto; cursor: pointer;
         }
         
         .photo-frame img { 
@@ -180,7 +186,7 @@
             .photo-frame:hover::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
         }
         
-        /* Efecto Táctil en Móvil (Se activa con JS al tocar) */
+        /* Efecto Táctil en Móvil (Se activa con JS) */
         .photo-frame.is-touched img { transform: scale(1); filter: grayscale(0%) contrast(1.1) brightness(1.05); }
         .photo-frame.is-touched::after { background: inset 0 0 20px rgba(0,0,0,0.1); }
 
@@ -289,16 +295,24 @@
             /* Transformación del Sidebar a Header Fijo Superior */
             aside {
                 width: 100%; height: var(--header-mobile-height); flex-direction: row; padding: 0 1.5rem;
+                justify-content: space-between; align-items: center; /* ESTO ARREGLA LAS 3 RAYITAS */
                 border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                 background: rgba(13, 18, 29, 0.98); backdrop-filter: blur(10px);
                 z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             }
             
+            .sidebar-inner { flex-direction: row; align-items: center; justify-content: space-between; width: 100%;}
+            .sidebar-top { padding: 0; width: auto;}
+            .sidebar-bottom { display: none;}
+            
+            /* Ocultar Navegación de Escritorio */
+            nav.desktop-nav { display: none; }
+
             /* Logo compacto en móvil para evitar que se rompa el nombre largo */
             .brand-container { flex-direction: row; width: auto; align-items: center; gap: 6px; margin: 0; }
             .brand-signature { border: none; padding: 0; margin: 0; background: transparent; display: flex; align-items: baseline; white-space: nowrap;}
-            .signature-first { font-size: 1rem; display: inline-block; letter-spacing: 1px; }
-            .signature-last { font-size: 1.1rem; display: inline-block; margin-left: 4px; }
+            .signature-first { font-size: 0.95rem; display: inline-block; letter-spacing: 1px; }
+            .signature-last { font-size: 0.85rem; display: inline-block; margin-left: 4px; }
             .brand-subtitle { display: none; }
 
             /* Menú Hamburguesa Visible */
@@ -307,7 +321,7 @@
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Menú de Navegación Desplegable */
+            /* Menú de Navegación Desplegable (Móvil) */
             nav.mobile-overlay {
                 display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100%;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -319,7 +333,8 @@
             nav.mobile-overlay a { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; display: block;}
             nav.mobile-overlay a:hover, nav.mobile-overlay a.active { color: var(--accent-blue); font-weight: 500;}
             
-            .mobile-lang { display: flex; justify-content: center; gap: 10px; width: 100%;}
+            /* Language Switcher en el menú móvil */
+            .mobile-lang { display: flex; justify-content: center; gap: 10px; margin-top: 1rem; width: 100%;}
 
             /* Ajustes Generales de la Vista */
             main { margin-left: 0; width: 100%; margin-top: 0; }
@@ -349,14 +364,14 @@
 
         /* --- OPTIMIZACIÓN EXTREMA PARA CELULARES PEQUEÑOS --- */
         @media (max-width: 768px) {
+            section { padding: 4.5rem 5%; }
             .section-title { font-size: 2.2rem; margin-bottom: 2rem; text-align: left; }
             .section-title::after { margin: 15px 0 0 0; }
             
             /* Ajuste extra de logo para teléfonos muy finos (iPhone SE) */
             @media (max-width: 375px) {
                 aside { padding: 0 1rem; }
-                .signature-first { font-size: 0.95rem; letter-spacing: 0.5px; }
-                .signature-last { font-size: 1rem; }
+                .signature-first { font-size: 0.85rem; letter-spacing: 0.5px; }
                 .loader-text { font-size: 0.65rem; letter-spacing: 2px; }
             }
 
@@ -371,6 +386,7 @@
             .text-block p { font-size: 1rem; text-align: left; }
             
             .testimonial-card { padding: 2.5rem 1.5rem; text-align: left; }
+            .testimonial-card::before { font-size: 4rem; top: 0.5rem; right: 1rem; opacity: 0.5;}
             .testimonial-card p.quote { font-size: 1.05rem; }
 
             /* Lista adaptada */
@@ -399,43 +415,53 @@
 
     <!-- HEADER / SIDEBAR RESPONSIVO -->
     <aside>
-        <a href="#inicio" class="brand-container">
-            <div class="brand-signature">
-                <span class="signature-first">Eugenio Carreño</span>
-                <span class="signature-last">Jr.</span>
+        <div class="sidebar-inner">
+            <div class="sidebar-top">
+                <a href="#inicio" class="brand-container">
+                    <div class="brand-signature">
+                        <span class="signature-first">Eugenio Carreño</span>
+                        <span class="signature-last">Jr.</span>
+                    </div>
+                    <span class="brand-subtitle" data-i18n="subtitle">Trompeta Clásica</span>
+                </a>
             </div>
-            <span class="brand-subtitle" data-i18n="subtitle">Trompeta Clásica</span>
-        </a>
-        
-        <!-- NAV ESCRITORIO -->
-        <nav class="desktop-nav">
-            <ul>
-                <li><a href="#inicio" class="nav-link" data-i18n="nav-home">Inicio</a></li>
-                <li><a href="#biografia" class="nav-link" data-i18n="nav-bio">Biografía</a></li>
-                <li><a href="#testimonios" class="nav-link" data-i18n="nav-awards">Reconocimientos</a></li>
-                <li><a href="#repertorio" class="nav-link" data-i18n="nav-repertoire">Repertorio</a></li>
-                <li><a href="#contacto" class="nav-link" data-i18n="nav-contact">Contacto</a></li>
-            </ul>
-        </nav>
+            
+            <!-- NAVEGACIÓN ESCRITORIO -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#inicio" class="nav-link" data-i18n="nav-home">Inicio</a></li>
+                    <li><a href="#biografia" class="nav-link" data-i18n="nav-bio">Biografía</a></li>
+                    <li><a href="#testimonios" class="nav-link" data-i18n="nav-awards">Reconocimientos</a></li>
+                    <li><a href="#repertorio" class="nav-link" data-i18n="nav-repertoire">Repertorio</a></li>
+                    <li><a href="#contacto" class="nav-link" data-i18n="nav-contact">Contacto</a></li>
+                </ul>
+            </nav>
 
-        <!-- SELECTOR DE IDIOMA ORIGINAL (ESCRITORIO) -->
-        <div class="language-switcher">
-            <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
-            <span class="lang-divider">/</span>
-            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
-            <span class="lang-divider">/</span>
-            <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-        </div>
+            <div class="sidebar-bottom">
+                <!-- SELECTOR DE IDIOMA ORIGINAL (ESCRITORIO) -->
+                <div class="language-switcher">
+                    <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+                    <span class="lang-divider">/</span>
+                    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                    <span class="lang-divider">/</span>
+                    <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <p>Paris — Lyon</p>
+                </div>
+            </div>
 
-        <!-- Botón de Hamburguesa Exclusivo para Móviles -->
-        <div class="menu-toggle" id="menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
+            <!-- Botón de Hamburguesa Exclusivo para Móviles -->
+            <div class="menu-toggle" id="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </aside>
 
@@ -500,8 +526,11 @@
                 <h2 class="section-title reveal" data-i18n="bio-title">Trayectoria</h2>
                 
                 <div class="clean-layout reveal">
-                    <div class="photo-frame touch-photo">
-                        <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
+                    <div class="photo-col">
+                        <!-- FOTO TÁCTIL -->
+                        <div class="photo-frame touch-photo">
+                            <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
+                        </div>
                     </div>
 
                     <div class="text-block">
@@ -557,8 +586,10 @@
                 <h2 class="section-title reveal" data-i18n="rep-title">Repertorio Destacado</h2>
                 
                 <div class="clean-layout reverse reveal">
-                    <div class="photo-frame touch-photo">
-                        <img src="foto.4.JPG" alt="Eugenio Carreño en presentación" onerror="this.style.display='none'">
+                    <div class="photo-col">
+                        <div class="photo-frame touch-photo">
+                            <img src="foto.4.JPG" alt="Eugenio Carreño en presentación" onerror="this.style.display='none'">
+                        </div>
                     </div>
                     
                     <div class="text-block">
@@ -591,8 +622,10 @@
                 <h2 class="section-title reveal" data-i18n="contact-title">Contacto</h2>
                 
                 <div class="clean-layout reveal">
-                    <div class="photo-frame touch-photo">
-                        <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
+                    <div class="photo-col">
+                        <div class="photo-frame touch-photo">
+                            <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
+                        </div>
                     </div>
 
                     <div class="contact-content text-block">
@@ -650,7 +683,7 @@
             mobileNav.classList.toggle('open');
         });
 
-        // Cerrar menú al hacer clic en un enlace
+        // Cerrar menú al hacer clic en un enlace (Solo en móvil)
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if(window.innerWidth <= 1024) {
@@ -663,17 +696,14 @@
         // --- EFECTO TÁCTIL EN FOTOS PARA CELULARES ---
         const touchPhotos = document.querySelectorAll('.touch-photo');
         touchPhotos.forEach(photo => {
-            // Al tocar se añade la clase
             photo.addEventListener('touchstart', () => {
                 photo.classList.add('is-touched');
             }, {passive: true});
             
-            // Al soltar el dedo se quita la clase
             photo.addEventListener('touchend', () => {
                 photo.classList.remove('is-touched');
             });
             
-            // Si desliza fuera de la foto también se quita
             photo.addEventListener('touchcancel', () => {
                 photo.classList.remove('is-touched');
             });
@@ -726,7 +756,7 @@
                 "bio-title": "Trayectoria",
                 "bio-p1": "Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.",
                 "bio-p2": "Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.",
-                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de Música y Danza de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
+                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de París depuis 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
                 "bio-box-title": "Trompetista Solista | Orquesta Nacional de Lyon",
                 "bio-box-p": "Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.",
                 "parallax-quote": "\"La música es la arquitectura del sonido, y la trompeta, su voz más brillante.\"",
@@ -806,12 +836,6 @@
                 if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
             document.getElementById('page-title').innerText = translations[lang].pageTitle;
-            
-            // Cerrar menú móvil al seleccionar idioma
-            if(window.innerWidth <= 1024) {
-                menuBtn.classList.remove('active');
-                mobileNav.classList.remove('open');
-            }
         }
 
         // --- EFECTOS DE SCROLL (REVEAL) ---
