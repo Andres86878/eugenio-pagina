@@ -162,14 +162,14 @@
         .clean-layout.reverse { grid-template-columns: 1fr 1fr; }
         .text-block { display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
-        /* CONTENEDOR DE FOTOS INTERACTIVO (Evita menú nativo y activa color al tacto) */
+        /* CONTENEDOR DE FOTOS INTERACTIVO */
         .photo-col { width: 100%; display: flex; justify-content: center; }
         .photo-frame {
             width: 100%; max-width: 440px; aspect-ratio: 4 / 5;
             background-color: var(--bg-placeholder); border-radius: 6px;
             overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1; margin: 0 auto; cursor: pointer;
-            -webkit-touch-callout: none; /* Desactiva menú contextual en iOS/Android */
+            -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
         }
@@ -179,7 +179,7 @@
             transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease; 
             filter: grayscale(100%) contrast(1.05) brightness(0.95);
             transform: scale(1.05); 
-            pointer-events: none; /* Permite que el toque lo reciba el contenedor frame directamente */
+            pointer-events: none;
         }
         .photo-frame::after { 
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
@@ -529,7 +529,7 @@
                 
                 <div class="clean-layout reveal">
                     <div class="photo-col">
-                        <!-- FOTO TÁCTIL MEJORADA -->
+                        <!-- FOTO TÁCTIL -->
                         <div class="photo-frame touch-photo" id="photo2">
                             <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
                         </div>
@@ -600,21 +600,22 @@
                     
                     <div class="text-block">
                         <div class="repertorio-list">
-                            <a href="https://youtu.be/LZljKl7xqRA" target="_blank" class="repertorio-item">
+                            <a href="https://www.youtube.com/watch?v=LZljKl7xqRA" target="_blank" rel="noopener noreferrer" class="repertorio-item">
                                 <h4>Arutunian Trumpet Concerto</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
                             </a>
-                            <a href="https://youtu.be/-90YWfgcWB8" target="_blank" class="repertorio-item">
-                                <h4>Haydn Trumpet Concerto</h4>
-                                <span data-i18n="rep-action">Ver Interpretación ➔</span>
-                            </a>
-                            <a href="https://youtu.be/D2ofiZRtCKI" target="_blank" class="repertorio-item">
+                            <a href="https://www.youtube.com/watch?v=D2ofiZRtCKI" target="_blank" rel="noopener noreferrer" class="repertorio-item">
                                 <h4>Trumpet Selection</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
                             </a>
-                            <a href="https://youtu.be/bzucZ-nNCN4" target="_blank" class="repertorio-item">
+                            <a href="https://www.youtube.com/watch?v=bzucZ-nNCN4" target="_blank" rel="noopener noreferrer" class="repertorio-item">
                                 <h4>Sr Jou Pablo Camacaro</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
+                            </a>
+                            <!-- Enlace al canal de YouTube para ver más repertorio -->
+                            <a href="http://www.youtube.com/@eugenioarturocarrenogomez914" target="_blank" rel="noopener noreferrer" class="repertorio-item">
+                                <h4 data-i18n="rep-more">Ver más repertorio (Canal de YouTube)</h4>
+                                <span data-i18n="rep-channel">Visitar Canal ➔</span>
                             </a>
                         </div>
                     </div>
@@ -646,7 +647,7 @@
                                 <div class="contact-card-action" data-i18n="contact-c1-act">Enviar Correo ➔</div>
                             </a>
 
-                            <a href="https://instagram.com/eugeniocarrenojr" target="_blank" class="contact-card">
+                            <a href="https://instagram.com/eugeniocarrenojr" target="_blank" rel="noopener noreferrer" class="contact-card">
                                 <div>
                                     <div class="contact-card-type">Instagram</div>
                                     <div class="contact-card-value">@eugeniocarrenojr</div>
@@ -690,13 +691,12 @@
             });
         });
 
-        // --- EFECTO TÁCTIL EN FOTOS PARA CELULARES (MANTIENE EL DEDO = A COLOR) ---
+        // --- EFECTO TÁCTIL EN FOTOS PARA CELULARES ---
         const touchPhotos = document.querySelectorAll('.touch-photo');
         touchPhotos.forEach(photo => {
-            // Evita comportamiento predeterminado del navegador al mantener presionado
             photo.addEventListener('contextmenu', e => e.preventDefault());
 
-            photo.addEventListener('touchstart', (e) => {
+            photo.addEventListener('touchstart', () => {
                 photo.classList.add('is-touched');
             }, {passive: true});
             
@@ -768,6 +768,7 @@
                 "quote-2": "\"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa.\"",
                 "quote-2-sub": "Solista Internacional",
                 "rep-title": "Repertorio Destacado", "rep-action": "Ver Interpretación ➔",
+                "rep-more": "Ver más repertorio (Canal de YouTube)", "rep-channel": "Visitar Canal ➔",
                 "contact-title": "Contacto", "contact-p": "Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Enviar Correo ➔",
                 "contact-c3-act": "Visitar Perfil ➔",
@@ -795,6 +796,7 @@
                 "quote-2": "\"Young Carreño possesses great technical mastery and, above all, a Great Musical Heart. His interpretive approach aims at deep respect for music, conveyed through clear and precise performance.\"",
                 "quote-2-sub": "International Soloist",
                 "rep-title": "Featured Repertoire", "rep-action": "Watch Performance ➔",
+                "rep-more": "View more repertoire (YouTube Channel)", "rep-channel": "Visit Channel ➔",
                 "contact-title": "Contact", "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Send Email ➔",
                 "contact-c3-act": "Visit Profile ➔",
@@ -821,7 +823,7 @@
                 "bio-p4": "Depuis 2022, il poursuit son perfectionnement au Conservatoire National Supérieur de Musique et de Danse de Paris auprès d’Alexandre Baty et de Stéphane Gourvat. Son activité professionnelle l’amène également à être régulièrement invité par des institutions musicales majeures telles que l’Orchestre Philharmonique de Radio France et l’Opéra National de Paris.",
                 "bio-p5": "À travers un parcours construit entre tradition orchestrale vénézuélienne et excellence musicale française, il développe une personnalité artistique à la fois virtuose, engagée et profondément tournée vers la scène symphonique.",
                 "bio-box-title": "Trompette Solo | Orchestre National de Lyon",
-                "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre National de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
+                "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre Nacional de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
                 "parallax-quote": "\"La musique est l'architecture du son, et la trompette, sa voix la plus brillante.\"",
                 "parallax-sub": "Passion et Discipline Sinfónica",
                 "awards-title": "Distinctions",
@@ -830,6 +832,8 @@
                 "quote-2-sub": "Solista International",
                 "rep-title": "Répertoire Phare",
                 "rep-action": "Voir la Vidéo ➔",
+                "rep-more": "Voir plus de répertoire (Chaîne YouTube)",
+                "rep-channel": "Visiter la Chaîne ➔",
                 "contact-title": "Contact",
                 "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
                 "contact-c1-type": "Booking & Management",
