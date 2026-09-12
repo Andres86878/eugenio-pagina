@@ -68,7 +68,7 @@
         @keyframes drop { 0% { top: -50%; } 100% { top: 150%; } }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* --- SIDEBAR IZQUIERDO (ESCRITORIO - TU DISEÑO ORIGINAL EXACTO) --- */
+        /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
             position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: space-between;
@@ -314,7 +314,7 @@
             .signature-last { font-size: 0.85rem; display: inline-block; margin-left: 4px; }
             .brand-subtitle { display: none; }
 
-            /* Menú Hamburguesa Visible (3 rayitas) */
+            /* Menú Hamburguesa Visible */
             .menu-toggle { display: flex; }
             .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
@@ -322,12 +322,12 @@
 
             /* Menú de Navegación Desplegable Móvil (Compatible con Android y Apple) */
             nav.mobile-overlay {
-                display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100vw;
+                display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100%;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
                 padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
                 box-shadow: 0 15px 30px rgba(0,0,0,0.6); z-index: 1999; flex-direction: column;
             }
-            nav.mobile-overlay.open { max-height: calc(100vh - var(--header-mobile-height)); padding: 2rem 0; overflow-y: auto; }
+            nav.mobile-overlay.open { max-height: 500px; padding: 2rem 0; }
             nav.mobile-overlay ul { gap: 1.8rem; list-style: none; display: flex; flex-direction: column; text-align: center; width: 100%; margin-bottom: 2rem;}
             nav.mobile-overlay a { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; display: block;}
             nav.mobile-overlay a:hover, nav.mobile-overlay a.active { color: var(--accent-blue); font-weight: 500;}
@@ -531,11 +531,15 @@
                     </div>
 
                     <div class="text-block">
-                        <p data-i18n="bio-p1">Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en el Festival de Salzburgo (2013) y de Gustavo Dudamel.</p>
+                        <p data-i18n="bio-p1">Formado en Venezuela en el seno de El Sistema y posteriormente en el Conservatorio Nacional Superior de Música y Danza de París, destaca par su sólida maestría en la orquesta sinfónica y una técnica de altísimo nivel. Su experiencia como trompetista solista de la prestigiosa Orquesta Nacional de Lyon consagra una trayectoria marcada ya por numerosas vivencias internacionales.</p>
                         <span class="sr-only"></span>
-                        <p data-i18n="bio-p2">Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.</p>
+                        <p data-i18n="bio-p2">Nacido en Caracas en 2001, inició sus estudios de trompeta en el Sistema Nacional de Orquestas Juveniles e Infantiles de Venezuela. Su precocidad musical lo llevó a integrar la Orquesta Sinfónica Nacional Infantil de Venezuela, con la que se presentó en el Festival de Salzburgo de 2013 bajo la dirección de Sir Simon Rattle y Gustavo Dudamel.</p>
                         <span class="sr-only"></span>
-                        <p data-i18n="bio-p3">Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.</p>
+                        <p data-i18n="bio-p3">Su recorrido lo ha llevado a actuar en festivales mayores de Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela. Paralelamente, ha recibido la enseñanza de grandes referentes de la trompeta —como David Guerrier, Éric Aubier y Pacho Flores— en clases magistrales que han contribuido a moldear su identidad artística y a profundizar su virtuosismo.</p>
+                        <span class="sr-only"></span>
+                        <p data-i18n="bio-p4">Desde 2022 continúa su perfeccionamiento en el Conservatorio Nacional Superior de Música y Danza de París con los profesores Alexandre Baty y Stéphane Gourvat. Su actividad profesional incluye invitaciones regulares por parte de destacadas instituciones musicales como la Orquesta Filarmónica de Radio France y la Ópera Nacional de París.</p>
+                        <span class="sr-only"></span>
+                        <p data-i18n="bio-p5">A través de un camino construido entre la tradición orquestal venezolana y la excelencia musical francesa, desarrolla una personalidad artística virtuosa, comprometida y profundamente vinculada a la escena sinfónica.</p>
                         <span class="sr-only"></span>
                         
                         <div class="highlight-box">
@@ -635,15 +639,6 @@
                                     <div class="contact-card-value">eacarrenogomez@gmail.com</div>
                                 </div>
                                 <div class="contact-card-action" data-i18n="contact-c1-act">Enviar Correo ➔</div>
-                            </a>
-
-                            <a href="tel:+33745652218" class="contact-card">
-                                <div>
-                                    <div class="contact-card-type" data-i18n="contact-c2-type">Direct Line</div>
-                                    <div class="contact-card-value">+33 (7) 45 65 22 18</div>
-                                    <span class="sr-only"></span>
-                                </div>
-                                <div class="contact-card-action" data-i18n="contact-c2-act">Llamar Ahora ➔</div>
                             </a>
 
                             <a href="https://instagram.com/eugeniocarrenojr" target="_blank" class="contact-card">
@@ -751,9 +746,11 @@
                 "hero-p": "Forjado en El Sistema de Venezuela y perfeccionado en el Conservatorio Nacional Superior de París. Una técnica sinfónica de altísimo nivel, consolidada al asumir como trompetista solista de la prestigiosa Orquesta Nacional de Lyon.",
                 "btn-works": "Explorar Obras", "btn-booking": "Solicitar Booking",
                 "bio-title": "Trayectoria",
-                "bio-p1": "Nacido en Caracas en el 2001, inició su formación en el Sistema Nacional de Orquestas de Venezuela. Su virtuosismo lo llevó rápidamente a la Orquesta Sinfónica Nacional Infantil, actuando bajo la batuta de Sir Simon Rattle en Festival de Salzburgo (2013) y de Gustavo Dudamel.",
-                "bio-p2": "Ha participado en festivales de gran prestigio en Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela, puliendo su técnica en masterclasses exclusivas con leyendas del instrumento como David Guerrier, Eric Aubier y Pacho Flores.",
-                "bio-p3": "Tras perfeccionar su arte en el Conservatorio Nacional Superior de París desde 2022 con los maestros Alexandre Baty y Stephane Gourvat, ha actuado como invitado en la Orchestre Philharmonique de Radio France y la Ópera Nacional de París.",
+                "bio-p1": "Formado en Venezuela en el seno de El Sistema y posteriormente en el Conservatorio Nacional Superior de Música y Danza de París, destaca por su sólida maestría en la orquesta sinfónica y una técnica de altísimo nivel. Su experiencia como trompetista solista de la prestigiosa Orquesta Nacional de Lyon consagra una trayectoria marcada ya por numerosas vivencias internacionales.",
+                "bio-p2": "Nacido en Caracas en 2001, inició sus estudios de trompeta en el Sistema Nacional de Orquestas Juveniles e Infantiles de Venezuela. Su precocidad musical lo llevó a integrar la Orquesta Sinfónica Nacional Infantil de Venezuela, con la que se presentó en el Festival de Salzburgo de 2013 bajo la dirección de Sir Simon Rattle y Gustavo Dudamel.",
+                "bio-p3": "Su recorrido lo ha llevado a actuar en festivales mayores de Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela. Paralelamente, ha recibido la enseñanza de grandes referentes de la trompeta —como David Guerrier, Éric Aubier y Pacho Flores— en clases magistrales que han contribuido a moldear su identidad artística y a profundizar su virtuosismo.",
+                "bio-p4": "Desde 2022 continúa su perfeccionamiento en el Conservatorio Nacional Superior de Música y Danza de París con los profesores Alexandre Baty y Stéphane Gourvat. Su actividad profesional incluye invitaciones regulares por parte de destacadas instituciones musicales como la Orquesta Filarmónica de Radio France y la Ópera Nacional de París.",
+                "bio-p5": "A través de un camino construido entre la tradición orquestal venezolana y la excelencia musical francesa, desarrolla una personalidad artística virtuosa, comprometida y profundamente vinculada a la escena sinfónica.",
                 "bio-box-title": "Trompetista Solista | Orquesta Nacional de Lyon",
                 "bio-box-p": "Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.",
                 "parallax-quote": "\"La música es la arquitectura del sonido, y la trompeta, su voz más brillante.\"",
@@ -765,7 +762,6 @@
                 "rep-title": "Repertorio Destacado", "rep-action": "Ver Interpretación ➔",
                 "contact-title": "Contacto", "contact-p": "Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.",
                 "contact-c1-type": "Booking & Management", "contact-c1-act": "Enviar Correo ➔",
-                "contact-c2-type": "Direct Line", "contact-c2-act": "Llamar Ahora ➔",
                 "contact-c3-act": "Visitar Perfil ➔",
                 "footer-rights": "&copy; 2026 Eugenio Carreño Jr. Todos los derechos reservados."
             },
@@ -773,16 +769,15 @@
                 pageTitle: "Eugenio Carreño Jr. | Solo Trumpeter",
                 subtitle: "Classical Trumpet",
                 "nav-home": "Home", "nav-bio": "Biography", "nav-awards": "Recognitions", "nav-repertoire": "Repertoire", "nav-contact": "Contact",
-                "hero-pre": "International Soloist",
-                "hero-h1-1": "The art of sound",
-                "hero-h1-2": "and orchestration.",
+                "hero-pre": "International Soloist", "hero-h1-1": "The art of sound", "hero-h1-2": "and orchestration.",
                 "hero-p": "Forged in El Sistema of Venezuela and perfected at the National Superior Conservatory of Paris. A symphonic technique of the highest level, consolidated upon taking up the position of solo trumpet of the prestigious Orchestre National de Lyon.",
-                "btn-works": "Explore Works",
-                "btn-booking": "Request Booking",
+                "btn-works": "Explore Works", "btn-booking": "Request Booking",
                 "bio-title": "Biography",
-                "bio-p1": "Born in Caracas in 2001, he began his musical training in the National System of Youth and Children's Orchestras of Venezuela. His virtuosity quickly led him to the National Children's Symphony Orchestra of Venezuela, performing under the baton of Sir Simon Rattle at the 2013 Salzburg Festival and Gustavo Dudamel.",
-                "bio-p2": "He has participated in prestigious festivals in Austria, Italy, and Greece with the Venezuelan Brass Ensemble, refining his technique in exclusive masterclasses with instrument legends such as David Guerrier, Eric Aubier, and Pacho Flores.",
-                "bio-p3": "After perfecting his art at the National Superior Conservatory of Paris since 2022 with masters Alexandre Baty and Stephane Gourvat, he has frequently performed as a guest with the Orchestre Philharmonique de Radio France and the Paris National Opera.",
+                "bio-p1": "Trained in Venezuela within El Sistema and later at the National Superior Conservatory of Music and Dance in Paris, he stands out for his solid mastery of the symphony orchestra and high-level technique. His experience as solo trumpet for the prestigious Orchestre National de Lyon crowns a career already marked by numerous international experiences.",
+                "bio-p2": "Born in Caracas in 2001, he began playing the trumpet within the National System of Youth and Children's Orchestras of Venezuela. His musical precocity led him to join the National Children's Symphony Orchestra of Venezuela, performing with them notably at the 2013 Salzburg Festival under the baton of Sir Simon Rattle and Gustavo Dudamel.",
+                "bio-p3": "His path has subsequently led him to perform at major festivals in Austria, Italy, and Greece with the Venezuelan Brass Ensemble. Concurrently, he has benefited from the teaching of great trumpet figures—such as David Guerrier, Éric Aubier, and Pacho Flores—in masterclasses that have shaped his artistic identity and deepened his virtuosity.",
+                "bio-p4": "Since 2022, he has continued his advanced studies at the National Superior Conservatory of Music and Dance in Paris under Alexandre Baty and Stéphane Gourvat. His professional activity also involves regular invitations by major musical institutions such as the Orchestre Philharmonique de Radio France and the Paris National Opera.",
+                "bio-p5": "Through a journey built between the Venezuelan orchestral tradition and French musical excellence, he develops an artistic personality that is both virtuoso, committed, and deeply dedicated to the symphonic scene.",
                 "bio-box-title": "Solo Trumpeter | Orchestre National de Lyon",
                 "bio-box-p": "Heir to a solid musical tradition founded in 1905, the Orchestre National de Lyon (ONL) stands out as one of Europe's most dynamic symphonic ensembles. Eugenio Carreño Jr. brings his interpretive brilliance to an ensemble celebrated for its excellence, versatility, and international projection.",
                 "parallax-quote": "\"Music is the architecture of sound, and the trumpet, its brightest voice.\"",
@@ -791,14 +786,9 @@
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
                 "quote-2": "\"Young Carreño possesses great technical mastery and, above all, a Great Musical Heart. His interpretive approach aims at deep respect for music, conveyed through clear and precise performance.\"",
                 "quote-2-sub": "International Soloist",
-                "rep-title": "Featured Repertoire",
-                "rep-action": "Watch Performance ➔",
-                "contact-title": "Contact",
-                "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
-                "contact-c1-type": "Booking & Management",
-                "contact-c1-act": "Send Email ➔",
-                "contact-c2-type": "Direct Line",
-                "contact-c2-act": "Call Now ➔",
+                "rep-title": "Featured Repertoire", "rep-action": "Watch Performance ➔",
+                "contact-title": "Contact", "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
+                "contact-c1-type": "Booking & Management", "contact-c1-act": "Send Email ➔",
                 "contact-c3-act": "Visit Profile ➔",
                 "footer-rights": "&copy; 2026 Eugenio Carreño Jr. All rights reserved."
             },
@@ -817,25 +807,25 @@
                 "btn-works": "Explorer les Œuvres",
                 "btn-booking": "Demander un Booking",
                 "bio-title": "Parcours",
-                "bio-p1": "Né à Caracas en 2001, il débute sa formation musicale au sein du Système National des Orchestres Juvéniles et Infantiles du Venezuela. Sa virtuosité l'amène rapidement à intégrer l'Orchestre Symphonique National Infantil du Venezuela, se produisant sous la direction de Sir Simon Rattle au Festival de Salzbourg 2013 et de Gustavo Dudamel.",
-                "bio-p2": "Il a participé à d'importants festivals en Autriche, en Italie et en Grèce avec l'Ensemble de Cuivres du Venezuela, perfectionnant sa technique lors de masterclasses exclusives avec des maîtres tels que David Guerrier, Eric Aubier et Pacho Flores.",
-                "bio-p3": "Après avoir perfectionné son art au Conservatoire National Supérieur de Paris depuis 2022 auprès d'Alexandre Baty et Stephane Gourvat, il est régulièrement invité au sein de l'Orchestre Philharmonique de Radio France et de l'Opéra National de Paris.",
+                "bio-p1": "Formé au Venezuela au sein d’El Sistema, puis au Conservatoire National Supérieur de Musique et de Danse de Paris, il s’impose par une solide maîtrise de l’orchestre symphonique et une technique de haut niveau. Son expérience en tant que trompette solo au sein du prestigieux Orchestre National de Lyon vient consacrer un parcours déjà marqué par de nombreuses expériences internationales.",
+                "bio-p2": "Né à Caracas en 2001, il commence la trompette au sein du Système National des Orchestres Juvéniles et Infantiles du Venezuela. Sa précocité musicale le conduit à intégrer l’Orchestre Symphonique National Infantil du Venezuela, avec lequel il se produit notamment au Festival de Salzbourg en 2013 sous la direction de Sir Simon Rattle et de Gustavo Dudamel.",
+                "bio-p3": "Son parcours l’amène ensuite à se produire dans plusieurs festivals majeurs en Autriche, en Italie et en Grèce avec l’Ensemble de Cuivres du Venezuela. Il bénéficie parallèlement de l’enseignement de grands noms de la trompette, notamment David Guerrier, Éric Aubier et Pacho Flores, lors de masterclasses qui contribuent à façonner son identité artistique et à approfondir sa virtuosité.",
+                "bio-p4": "Depuis 2022, il poursuit son perfectionnement au Conservatoire National Supérieur de Musique et de Danse de Paris auprès d’Alexandre Baty et de Stéphane Gourvat. Son activité professionnelle l’amène également à être régulièrement invité par des institutions musicales majeures telles que l’Orchestre Philharmonique de Radio France et l’Opéra National de Paris.",
+                "bio-p5": "À travers un parcours construit entre tradition orchestrale vénézuélienne et excellence musicale française, il développe une personnalité artistique à la fois virtuose, engagée et profondément tournée vers la scène symphonique.",
                 "bio-box-title": "Trompette Solo | Orchestre National de Lyon",
                 "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre National de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
                 "parallax-quote": "\"La musique est l'architecture du son, et la trompette, sa voix la plus brillante.\"",
                 "parallax-sub": "Passion et Discipline Sinfónica",
                 "awards-title": "Distinctions",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
-                "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interpretative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
-                "quote-2-sub": "Soliste International",
+                "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interprétative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
+                "quote-2-sub": "Solista International",
                 "rep-title": "Répertoire Phare",
                 "rep-action": "Voir la Vidéo ➔",
                 "contact-title": "Contact",
                 "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
                 "contact-c1-type": "Booking & Management",
                 "contact-c1-act": "Envoyer un Email ➔",
-                "contact-c2-type": "Ligne Directe",
-                "contact-c2-act": "Appeler Maintenant ➔",
                 "contact-c3-act": "Visiter le Profil ➔",
                 "footer-rights": "&copy; 2026 Eugenio Carreño Jr. Tous droits réservés."
             }
