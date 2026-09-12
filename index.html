@@ -162,13 +162,16 @@
         .clean-layout.reverse { grid-template-columns: 1fr 1fr; }
         .text-block { display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
-        /* CONTENEDOR DE FOTOS INTERACTIVO */
+        /* CONTENEDOR DE FOTOS INTERACTIVO (Evita menú nativo y activa color al tacto) */
         .photo-col { width: 100%; display: flex; justify-content: center; }
         .photo-frame {
             width: 100%; max-width: 440px; aspect-ratio: 4 / 5;
             background-color: var(--bg-placeholder); border-radius: 6px;
             overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; border: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1; margin: 0 auto; cursor: pointer;
+            -webkit-touch-callout: none; /* Desactiva menú contextual en iOS/Android */
+            -webkit-user-select: none;
+            user-select: none;
         }
         
         .photo-frame img { 
@@ -176,6 +179,7 @@
             transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease; 
             filter: grayscale(100%) contrast(1.05) brightness(0.95);
             transform: scale(1.05); 
+            pointer-events: none; /* Permite que el toque lo reciba el contenedor frame directamente */
         }
         .photo-frame::after { 
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
@@ -321,7 +325,7 @@
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Menú de Navegación Desplegable Móvil (Compatible avec Android et Apple) */
+            /* Menú de Navegación Desplegable Móvil (Compatible con Android y Apple) */
             nav.mobile-overlay {
                 display: flex; position: fixed; top: var(--header-mobile-height); left: 0; width: 100%;
                 background: var(--bg-panel); border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -525,8 +529,8 @@
                 
                 <div class="clean-layout reveal">
                     <div class="photo-col">
-                        <!-- FOTO TÁCTIL -->
-                        <div class="photo-frame touch-photo">
+                        <!-- FOTO TÁCTIL MEJORADA -->
+                        <div class="photo-frame touch-photo" id="photo2">
                             <img src="foto.2.JPG" alt="Eugenio Carreño Jr. Portrato" onerror="this.style.display='none'">
                         </div>
                     </div>
@@ -556,7 +560,7 @@
         <div class="parallax-banner">
             <div class="parallax-overlay"></div>
             <div class="parallax-content reveal">
-                <h3 class="serif" data-i18n="parallax-quote">"La música est l'architecture du son, et la trompeta, sa voix plus brillante."</h3>
+                <h3 class="serif" data-i18n="parallax-quote">"La música es la arquitectura del sonido, y la trompeta, su voz más brillante."</h3>
                 <p data-i18n="parallax-sub">Pasión y Disciplina Sinfónica</p>
             </div>
         </div>
@@ -589,14 +593,14 @@
                 
                 <div class="clean-layout reverse reveal">
                     <div class="photo-col">
-                        <div class="photo-frame touch-photo">
+                        <div class="photo-frame touch-photo" id="photo4">
                             <img src="foto.4.JPG" alt="Eugenio Carreño en presentación" onerror="this.style.display='none'">
                         </div>
                     </div>
                     
                     <div class="text-block">
                         <div class="repertorio-list">
-                            <a href="https://youtu.be/LZIjKl7xqRA" target="_blank" class="repertorio-item">
+                            <a href="https://youtu.be/LZljKl7xqRA" target="_blank" class="repertorio-item">
                                 <h4>Arutunian Trumpet Concerto</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
                             </a>
@@ -625,7 +629,7 @@
                 
                 <div class="clean-layout reveal">
                     <div class="photo-col">
-                        <div class="photo-frame touch-photo">
+                        <div class="photo-frame touch-photo" id="photo5">
                             <img src="foto.5.JPG" alt="Eugenio Carreño Sesión Fotográfica" onerror="this.style.display='none'">
                         </div>
                     </div>
@@ -686,10 +690,13 @@
             });
         });
 
-        // --- EFECTO TÁCTIL EN FOTOS PARA CELULARES ---
+        // --- EFECTO TÁCTIL EN FOTOS PARA CELULARES (MANTIENE EL DEDO = A COLOR) ---
         const touchPhotos = document.querySelectorAll('.touch-photo');
         touchPhotos.forEach(photo => {
-            photo.addEventListener('touchstart', () => {
+            // Evita comportamiento predeterminado del navegador al mantener presionado
+            photo.addEventListener('contextmenu', e => e.preventDefault());
+
+            photo.addEventListener('touchstart', (e) => {
                 photo.classList.add('is-touched');
             }, {passive: true});
             
