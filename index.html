@@ -236,14 +236,14 @@
         .parallax-content h3 { font-size: 2.5rem; color: #ffffff; margin-bottom: 1rem; line-height: 1.3; font-style: italic;}
         .parallax-content p { color: var(--accent-blue); text-transform: uppercase; letter-spacing: 5px; font-size: 0.75rem; font-weight: 500;}
 
-        /* --- TESTIMONIOS --- */
+        /* --- TESTIMONIOS (RECONOCIMIENTOS - TRES TARJETAS) --- */
         #testimonios { background-color: var(--bg-dark); }
-        .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; position: relative; z-index: 2;}
-        .testimonial-card { padding: 3rem 2.5rem; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition-smooth); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between;}
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; z-index: 2;}
+        .testimonial-card { padding: 2.5rem 2rem; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition-smooth); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between;}
         .testimonial-card:hover { border-color: rgba(100, 149, 237, 0.4); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: rgba(255, 255, 255, 0.03); }
-        .testimonial-card p.quote { font-size: 1.1rem; font-style: italic; margin-bottom: 2.5rem; line-height: 1.9; color: #ffffff; position: relative; z-index: 1;}
-        .testimonial-card h4 { font-size: 1.1rem; margin-bottom: 0.2rem; letter-spacing: 1px; color: var(--accent-blue); font-weight: 400;}
-        .testimonial-card span { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+        .testimonial-card p.quote { font-size: 0.95rem; font-style: italic; margin-bottom: 2rem; line-height: 1.8; color: #ffffff; position: relative; z-index: 1;}
+        .testimonial-card h4 { font-size: 1.05rem; margin-bottom: 0.2rem; letter-spacing: 1px; color: var(--accent-blue); font-weight: 400;}
+        .testimonial-card span { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
 
         /* --- REPERTORIO --- */
         #repertorio { background-color: var(--bg-panel); }
@@ -565,7 +565,7 @@
             </div>
         </div>
 
-        <!-- 3. TESTIMONIOS -->
+        <!-- 3. TESTIMONIOS (RECONOCIMIENTOS - TRES TARJETAS) -->
         <section id="testimonios">
             <div class="section-container">
                 <h2 class="section-title reveal" data-i18n="awards-title">Reconocimientos</h2>
@@ -581,6 +581,12 @@
                         <span class="sr-only"></span>
                         <h4>Pacho Flores</h4>
                         <span data-i18n="quote-2-sub">Solista Internacional</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="quote" data-i18n="quote-3">"Reconocido como semifinalista en la prestigiosa 7ª edición del Concurso Internacional de Trompeta Maurice André en París (2022), consolidando su proyección global entre los mejores talentos de su generación."</p>
+                        <span class="sr-only"></span>
+                        <h4 data-i18n="maurice-title">Concurso Maurice André</h4>
+                        <span data-i18n="maurice-sub">Semifinalista • París 2022</span>
                     </div>
                 </div>
             </div>
@@ -767,6 +773,9 @@
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
                 "quote-2": "\"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa.\"",
                 "quote-2-sub": "Solista Internacional",
+                "quote-3": "\"Reconocido como semifinalista en la prestigiosa 7ª edición del Concurso Internacional de Trompeta Maurice André en París (2022), consolidando su proyección global entre los mejores talentos de su generación.\"",
+                "maurice-title": "Concurso Maurice André",
+                "maurice-sub": "Semifinalista • París 2022",
                 "rep-title": "Repertorio Destacado", "rep-action": "Ver Interpretación ➔",
                 "rep-more": "Ver más repertorio (Canal de YouTube)", "rep-channel": "Visitar Canal ➔",
                 "contact-title": "Contacto", "contact-p": "Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.",
@@ -795,6 +804,9 @@
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
                 "quote-2": "\"Young Carreño possesses great technical mastery and, above all, a Great Musical Heart. His interpretive approach aims at deep respect for music, conveyed through clear and precise performance.\"",
                 "quote-2-sub": "International Soloist",
+                "quote-3": "\"Recognized as a semifinalist in the prestigious 7th edition of the Maurice André International Trumpet Competition in Paris (2022), consolidating his global projection among his generation's top talents.\"",
+                "maurice-title": "Maurice André Competition",
+                "maurice-sub": "Semifinalist • Paris 2022",
                 "rep-title": "Featured Repertoire", "rep-action": "Watch Performance ➔",
                 "rep-more": "View more repertoire (YouTube Channel)", "rep-channel": "Visit Channel ➔",
                 "contact-title": "Contact", "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
@@ -820,16 +832,19 @@
                 "bio-p1": "Formé au Venezuela au sein d’El Sistema, puis au Conservatoire National Supérieur de Musique et de Danse de Paris, il s’impose par une solide maîtrise de l’orchestre symphonique et une technique de haut niveau. Son expérience en tant que trompette solo au sein du prestigieux Orchestre National de Lyon vient consacrer un parcours déjà marqué par de nombreuses expériences internationales.",
                 "bio-p2": "Né à Caracas en 2001, il commence la trompette au sein du Système National des Orchestres Juvéniles et Infantiles du Venezuela. Sa précocité musicale le conduit à intégrer l’Orchestre Symphonique National Infantil du Venezuela, avec lequel il se produit notamment au Festival de Salzbourg en 2013 sous la direction de Sir Simon Rattle et de Gustavo Dudamel.",
                 "bio-p3": "Son parcours l’amène ensuite à se produire dans plusieurs festivals majeurs en Autriche, en Italie et en Grèce avec l’Ensemble de Cuivres du Venezuela. Il bénéficie parallèlement de l’enseignement de grands noms de la trompette, notamment David Guerrier, Éric Aubier et Pacho Flores, lors de masterclasses qui contribuent à façonner son identité artistique et à approfondir sa virtuosité.",
-                "bio-p4": "Depuis 2022, il poursuit son perfectionnement au Conservatoire National Supérieur de Musique et de Danse de Paris auprès d’Alexandre Baty et de Stéphane Gourvat. Son activité professionnelle l’amène également à être régulièrement invité par des institutions musicales majeures telles que l’Orchestre Philharmonique de Radio France et l’Opéra National de Paris.",
+                "bio-p4": "Depuis 2022, il poursuit son perfectionnement au Conservatoire National Supérieur de Musique et de Danse de Paris auprès d’Alexandre Baty et de Stéphane Gourvat. Son activité profesional l’amène également à être régulièrement invité par des institutions musicales majeures telles que l’Orchestre Philharmonique de Radio France et l’Opéra National de Paris.",
                 "bio-p5": "À travers un parcours construit entre tradition orchestrale vénézuélienne et excellence musicale française, il développe une personnalité artistique à la fois virtuose, engagée et profondément tournée vers la scène symphonique.",
                 "bio-box-title": "Trompette Solo | Orchestre National de Lyon",
-                "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre Nacional de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
+                "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre National de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
                 "parallax-quote": "\"La musique est l'architecture du son, et la trompette, sa voix la plus brillante.\"",
                 "parallax-sub": "Passion et Discipline Sinfónica",
                 "awards-title": "Distinctions",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
                 "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interprétative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
                 "quote-2-sub": "Solista International",
+                "quote-3": "\"Reconnu comme demi-finaliste lors de la prestigieuse 7e édition du Concours International de Trompette Maurice André à Paris (2022), consolidant sa projection internationale.\"",
+                "maurice-title": "Concours Maurice André",
+                "maurice-sub": "Demi-finaliste • Paris 2022",
                 "rep-title": "Répertoire Phare",
                 "rep-action": "Voir la Vidéo ➔",
                 "rep-more": "Voir plus de répertoire (Chaîne YouTube)",
