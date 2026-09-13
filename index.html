@@ -69,6 +69,27 @@
         @keyframes drop { 0% { top: -50%; } 100% { top: 150%; } }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
+        /* --- BOTÓN FLOTANTE DE INSTAGRAM MEJORADO Y LLAMATIVO --- */
+        .floating-instagram {
+            position: fixed; bottom: 2.5rem; right: 2.5rem; width: 60px; height: 60px;
+            background: linear-gradient(135deg, #0d121d 0%, #151c2b 100%);
+            border: 2px solid var(--accent-blue); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: var(--accent-blue); box-shadow: 0 0 25px rgba(100, 149, 237, 0.35), 0 10px 25px rgba(0,0,0,0.6);
+            z-index: 1998; transition: var(--transition-smooth); text-decoration: none;
+            backdrop-filter: blur(10px); animation: floatGlow 3s ease-in-out infinite;
+        }
+        .floating-instagram svg { width: 26px; height: 26px; stroke: currentColor; transition: var(--transition-smooth); }
+        .floating-instagram:hover {
+            background: var(--accent-blue); color: var(--bg-dark);
+            border-color: #ffffff; transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 35px rgba(100, 149, 237, 0.6), 0 15px 30px rgba(0,0,0,0.5);
+        }
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 20px rgba(100, 149, 237, 0.3), 0 10px 25px rgba(0,0,0,0.6); }
+            50% { transform: translateY(-6px); box-shadow: 0 0 30px rgba(100, 149, 237, 0.5), 0 15px 30px rgba(0,0,0,0.6); }
+        }
+
         /* --- SIDEBAR IZQUIERDO (ESCRITORIO) --- */
         aside {
             width: var(--sidebar-width); height: 100vh; background-color: var(--bg-panel);
@@ -224,10 +245,6 @@
         /* --- BIOGRAFÍA --- */
         #biografia { z-index: 2; background-color: var(--bg-panel);}
         .text-block p { font-size: 1.05rem; line-height: 2; margin-bottom: 1.5rem; text-align: justify; color: var(--text-main); font-weight: 300;}
-        .highlight-box { margin-top: 2rem; padding: 2rem; border-left: 2px solid var(--accent-blue); background: rgba(255,255,255,0.01); transition: var(--transition-smooth); }
-        .highlight-box:hover { background: rgba(255,255,255,0.03); transform: translateX(3px); }
-        .highlight-box h4 { font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--accent-blue); letter-spacing: 1px; font-weight: 400;}
-        .highlight-box p { font-size: 0.95rem; margin-bottom: 0; color: var(--text-main); text-align: left; line-height: 1.8; }
 
         /* --- BANNERS PARALLAX --- */
         .parallax-banner { height: 50vh; width: 100%; position: relative; background-color: var(--bg-placeholder); background-image: url('foto.3.JPG'); background-attachment: fixed; background-size: cover; background-position: center 30%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -236,39 +253,106 @@
         .parallax-content h3 { font-size: 2.5rem; color: #ffffff; margin-bottom: 1rem; line-height: 1.3; font-style: italic;}
         .parallax-content p { color: var(--accent-blue); text-transform: uppercase; letter-spacing: 5px; font-size: 0.75rem; font-weight: 500;}
 
-        /* --- TESTIMONIOS (RECONOCIMIENTOS - TRES TARJETAS) --- */
+        /* --- TESTIMONIOS (RECONOCIMIENTOS - 4 TARJETAS) --- */
         #testimonios { background-color: var(--bg-dark); }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; z-index: 2;}
-        .testimonial-card { padding: 2.5rem 2rem; background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition-smooth); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between;}
-        .testimonial-card:hover { border-color: rgba(100, 149, 237, 0.4); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: rgba(255, 255, 255, 0.03); }
-        .testimonial-card p.quote { font-size: 0.95rem; font-style: italic; margin-bottom: 2rem; line-height: 1.8; color: #ffffff; position: relative; z-index: 1;}
-        .testimonial-card h4 { font-size: 1.05rem; margin-bottom: 0.2rem; letter-spacing: 1px; color: var(--accent-blue); font-weight: 400;}
+        .testimonial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; position: relative; z-index: 2;}
+        .testimonial-card { 
+            padding: 3rem 2.2rem; background: rgba(255, 255, 255, 0.015); 
+            border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition-smooth); 
+            border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between;
+            position: relative; overflow: hidden;
+        }
+        .testimonial-card::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+            background-color: var(--accent-blue); transform: scaleY(0); transition: var(--transition-smooth);
+        }
+        .testimonial-card:hover { 
+            border-color: rgba(100, 149, 237, 0.4); transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); background: rgba(255, 255, 255, 0.03); 
+        }
+        .testimonial-card:hover::before { transform: scaleY(1); }
+        .testimonial-card p.quote { font-size: 0.95rem; font-style: italic; margin-bottom: 2.5rem; line-height: 1.8; color: #ffffff; position: relative; z-index: 1;}
+        .testimonial-card h4 { font-size: 1.1rem; margin-bottom: 0.3rem; letter-spacing: 1px; color: var(--accent-blue); font-weight: 400;}
         .testimonial-card span { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- REPERTORIO --- */
+        /* --- REPERTORIO PREMIUM --- */
         #repertorio { background-color: var(--bg-panel); }
-        .repertorio-list { display: flex; flex-direction: column; width: 100%; }
-        .repertorio-item { display: flex; justify-content: space-between; align-items: center; padding: 2.5rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition-smooth); text-decoration: none; color: inherit; position: relative; }
-        .repertorio-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: var(--accent-blue); transition: var(--transition-smooth); }
-        .repertorio-item:hover { padding-left: 1.5rem; padding-right: 1.5rem; background: rgba(255,255,255,0.01); }
-        .repertorio-item:hover::after { width: 100%; }
-        .repertorio-item h4 { font-size: 1.3rem; margin: 0; color: var(--text-main); transition: var(--transition-smooth); font-weight: 400;}
-        .repertorio-item:hover h4 { color: #ffffff; }
-        .repertorio-item span { font-size: 0.6rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; transition: var(--transition-smooth);}
-        .repertorio-item:hover span { color: var(--accent-blue); }
+        .repertorio-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; width: 100%; }
 
-        /* --- CONTACTO --- */
+        .repertorio-card {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 1.8rem 2.2rem; border-radius: 6px; text-decoration: none; color: inherit;
+            transition: var(--transition-smooth); position: relative; overflow: hidden;
+        }
+        .repertorio-card::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+            background-color: var(--accent-blue); transform: scaleY(0); transition: var(--transition-smooth);
+        }
+        .repertorio-card:hover {
+            background: rgba(255, 255, 255, 0.03); border-color: rgba(100, 149, 237, 0.3);
+            transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .repertorio-card:hover::before { transform: scaleY(1); }
+        .repertorio-card h4 { font-size: 1.15rem; font-weight: 400; color: #ffffff; letter-spacing: 0.5px; }
+        .repertorio-card span {
+            font-size: 0.6rem; letter-spacing: 3px; color: var(--text-muted);
+            text-transform: uppercase; transition: var(--transition-smooth);
+            background: rgba(255, 255, 255, 0.03); padding: 8px 14px; border-radius: 4px;
+        }
+        .repertorio-card:hover span { color: #ffffff; background: rgba(100, 149, 237, 0.2); }
+
+        /* Tarjeta Estilizada y Diferenciada para el Canal de YouTube */
+        .repertorio-card.youtube-channel-card {
+            background: linear-gradient(135deg, rgba(100, 149, 237, 0.08) 0%, rgba(13, 18, 29, 0.8) 100%);
+            border: 1px solid rgba(100, 149, 237, 0.35);
+            margin-top: 0.8rem; padding: 2.2rem 2.2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .repertorio-card.youtube-channel-card::before { background-color: #ffffff; transform: scaleY(1); width: 4px; }
+        .repertorio-card.youtube-channel-card:hover {
+            border-color: var(--accent-blue);
+            background: linear-gradient(135deg, rgba(100, 149, 237, 0.15) 0%, rgba(13, 18, 29, 0.9) 100%);
+            box-shadow: 0 15px 40px rgba(100, 149, 237, 0.25);
+        }
+        .repertorio-card.youtube-channel-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; color: #ffffff; font-weight: 500;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .repertorio-card.youtube-channel-card h4::before {
+            content: '▶'; color: var(--accent-blue); font-size: 0.8rem;
+        }
+        .repertorio-card.youtube-channel-card span {
+            background: var(--accent-blue); color: var(--bg-dark); font-weight: 600;
+        }
+        .repertorio-card.youtube-channel-card:hover span {
+            background: #ffffff; color: var(--bg-dark);
+        }
+
+        /* --- CONTACTO DE LUJO --- */
         #contacto { background-color: var(--bg-dark); }
         .contact-content > p { font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.8; color: var(--text-main); }
-        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        .contact-card { background-color: var(--bg-panel); border: 1px solid rgba(255, 255, 255, 0.05); padding: 2rem; text-decoration: none; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; transition: var(--transition-smooth); border-radius: 4px; }
-        .contact-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background-color: transparent; transition: var(--transition-smooth); }
-        .contact-card:hover { transform: translateY(-3px); border-color: rgba(100, 149, 237, 0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.3); background-color: rgba(255, 255, 255, 0.02);}
+        .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .contact-card { 
+            background-color: var(--bg-panel); border: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 2.5rem 2rem; text-decoration: none; display: flex; flex-direction: column; 
+            justify-content: space-between; position: relative; overflow: hidden; 
+            transition: var(--transition-smooth); border-radius: 6px; 
+        }
+        .contact-card::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; 
+            background-color: transparent; transition: var(--transition-smooth); 
+        }
+        .contact-card:hover { 
+            transform: translateY(-4px); border-color: rgba(100, 149, 237, 0.4); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); background-color: rgba(255, 255, 255, 0.025);
+        }
         .contact-card:hover::before { background-color: var(--accent-blue); height: 3px; }
-        .contact-card-type { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.5rem; font-weight: 500; transition: color 0.3s ease; }
+        .contact-card-type { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.8rem; font-weight: 500; transition: color 0.3s ease; }
         .contact-card:hover .contact-card-type { color: var(--accent-blue); }
-        .contact-card-value { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #ffffff; font-weight: 400; word-break: break-all; transition: color 0.3s ease; }
-        .contact-card-action { margin-top: 2rem; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; transition: var(--transition-smooth); }
+        .contact-card-value { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #ffffff; font-weight: 400; word-break: break-all; transition: color 0.3s ease; }
+        .contact-card-action { margin-top: 2.5rem; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; transition: var(--transition-smooth); }
         .contact-card:hover .contact-card-action { color: #ffffff; transform: translateX(3px); }
 
         /* --- PIE DE PÁGINA (FOOTER) --- */
@@ -362,6 +446,7 @@
             .hero-dots { left: 50%; transform: translateX(-50%); bottom: 2rem; }
             
             .testimonial-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
             .parallax-banner { height: 40vh; background-attachment: scroll; /* Para iOS Safari y Android */ }
         }
 
@@ -388,18 +473,18 @@
             
             .text-block p { font-size: 1rem; text-align: left; }
             
-            .testimonial-card { padding: 2.5rem 1.5rem; text-align: left; }
+            .testimonial-card { padding: 2.2rem 1.5rem; text-align: left; }
             .testimonial-card p.quote { font-size: 1.05rem; }
 
-            /* Lista adaptada */
-            .repertorio-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.8rem 0; text-align: left;}
-            .repertorio-item h4 { font-size: 1.2rem; }
-            .repertorio-item span { align-self: flex-start; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; }
+            /* Tarjetas de repertorio adaptadas */
+            .repertorio-card { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.8rem 1.5rem; text-align: left;}
+            .repertorio-card h4 { font-size: 1.1rem; }
+            .repertorio-card span { align-self: flex-start; }
 
             .parallax-content h3 { font-size: 1.8rem; }
             .parallax-content p { font-size: 0.65rem; }
 
-            .contact-card { padding: 1.5rem; }
+            .contact-card { padding: 1.8rem 1.5rem; }
             .contact-card-value { font-size: 1.1rem; }
         }
     </style>
@@ -414,6 +499,15 @@
             <div class="loader-text">Eugenio Carreño Jr.</div>
         </div>
     </div>
+
+    <!-- BOTÓN FLOTANTE DE INSTAGRAM MEJORADO -->
+    <a href="https://instagram.com/eugeniocarrenojr" target="_blank" rel="noopener noreferrer" class="floating-instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+    </a>
 
     <!-- HEADER / SIDEBAR RESPONSIVO -->
     <aside>
@@ -545,12 +639,6 @@
                         <p data-i18n="bio-p4">Desde 2022 continúa su perfeccionamiento en el Conservatorio Nacional Superior de Música y Danza de París con los profesores Alexandre Baty y Stéphane Gourvat. Su actividad profesional incluye invitaciones regulares por parte de destacadas instituciones musicales como la Orquesta Filarmónica de Radio France y la Ópera Nacional de París.</p>
                         <span class="sr-only"></span>
                         <p data-i18n="bio-p5">A través de un camino construido entre la tradición orquestal venezolana y la excelencia musical francesa, desarrolla una personalidad artística virtuosa, comprometida y profundamente vinculada a la escena sinfónica.</p>
-                        <span class="sr-only"></span>
-                        
-                        <div class="highlight-box">
-                            <h4 data-i18n="bio-box-title">Trompetista Solista | Orquesta Nacional de Lyon</h4>
-                            <p data-i18n="bio-box-p">Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -565,34 +653,44 @@
             </div>
         </div>
 
-        <!-- 3. TESTIMONIOS (RECONOCIMIENTOS - TRES TARJETAS) -->
+        <!-- 3. TESTIMONIOS (RECONOCIMIENTOS - 4 TARJETAS) -->
         <section id="testimonios">
             <div class="section-container">
                 <h2 class="section-title reveal" data-i18n="awards-title">Reconocimientos</h2>
                 <div class="testimonial-grid reveal">
                     <div class="testimonial-card">
-                        <p class="quote">"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right."</p>
-                        <span class="sr-only"></span>
-                        <h4>Gustavo Dudamel</h4>
-                        <span data-i18n="dudamel-title">Music Director, LA Phil / New York Philharmonic</span>
+                        <p class="quote" data-i18n="quote-1">"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right."</p>
+                        <div>
+                            <h4 data-i18n="dudamel-name">Gustavo Dudamel</h4>
+                            <span data-i18n="dudamel-title">Music Director, LA Phil / New York Philharmonic</span>
+                        </div>
                     </div>
                     <div class="testimonial-card">
                         <p class="quote" data-i18n="quote-2">"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa."</p>
-                        <span class="sr-only"></span>
-                        <h4>Pacho Flores</h4>
-                        <span data-i18n="quote-2-sub">Solista Internacional</span>
+                        <div>
+                            <h4 data-i18n="pacho-name">Pacho Flores</h4>
+                            <span data-i18n="quote-2-sub">Solista Internacional</span>
+                        </div>
                     </div>
                     <div class="testimonial-card">
                         <p class="quote" data-i18n="quote-3">"Reconocido como semifinalista en la prestigiosa 7ª edición del Concurso Internacional de Trompeta Maurice André en París (2022), consolidando su proyección global entre los mejores talentos de su generación."</p>
-                        <span class="sr-only"></span>
-                        <h4 data-i18n="maurice-title">Concurso Maurice André</h4>
-                        <span data-i18n="maurice-sub">Semifinalista • París 2022</span>
+                        <div>
+                            <h4 data-i18n="maurice-title">Concurso Maurice André</h4>
+                            <span data-i18n="maurice-sub">Semifinalista • París 2022</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="quote" data-i18n="quote-4">"Posicionado como trompetista solista de la Orquesta Nacional de Lyon, aportando su brillantez interpretativa a uno de los conjuntos sinfónicos más dinámicos y prestigiosos de Europa."</p>
+                        <div>
+                            <h4 data-i18n="lyon-title">Orquesta Nacional de Lyon</h4>
+                            <span data-i18n="lyon-sub">Trompetista Solista</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. REPERTORIO -->
+        <!-- 4. REPERTORIO PREMIUM -->
         <section id="repertorio">
             <div class="section-container">
                 <h2 class="section-title reveal" data-i18n="rep-title">Repertorio Destacado</h2>
@@ -605,21 +703,21 @@
                     </div>
                     
                     <div class="text-block">
-                        <div class="repertorio-list">
-                            <a href="https://www.youtube.com/watch?v=LZljKl7xqRA" target="_blank" rel="noopener noreferrer" class="repertorio-item">
+                        <div class="repertorio-grid">
+                            <a href="https://www.youtube.com/watch?v=LZljKl7xqRA" target="_blank" rel="noopener noreferrer" class="repertorio-card">
                                 <h4>Arutunian Trumpet Concerto</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
                             </a>
-                            <a href="https://www.youtube.com/watch?v=D2ofiZRtCKI" target="_blank" rel="noopener noreferrer" class="repertorio-item">
+                            <a href="https://www.youtube.com/watch?v=D2ofiZRtCKI" target="_blank" rel="noopener noreferrer" class="repertorio-card">
                                 <h4>Trumpet Selection</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
                             </a>
-                            <a href="https://www.youtube.com/watch?v=bzucZ-nNCN4" target="_blank" rel="noopener noreferrer" class="repertorio-item">
+                            <a href="https://www.youtube.com/watch?v=bzucZ-nNCN4" target="_blank" rel="noopener noreferrer" class="repertorio-card">
                                 <h4>Sr Jou Pablo Camacaro</h4>
                                 <span data-i18n="rep-action">Ver Interpretación ➔</span>
                             </a>
-                            <!-- Enlace al canal de YouTube para ver más repertorio -->
-                            <a href="http://www.youtube.com/@eugenioarturocarrenogomez914" target="_blank" rel="noopener noreferrer" class="repertorio-item">
+                            <!-- Tarjeta Estilizada y Diferenciada para el Canal de YouTube -->
+                            <a href="http://www.youtube.com/@eugenioarturocarrenogomez914" target="_blank" rel="noopener noreferrer" class="repertorio-card youtube-channel-card">
                                 <h4 data-i18n="rep-more">Ver más repertorio (Canal de YouTube)</h4>
                                 <span data-i18n="rep-channel">Visitar Canal ➔</span>
                             </a>
@@ -629,7 +727,7 @@
             </div>
         </section>
 
-        <!-- 5. CONTACTO -->
+        <!-- 5. CONTACTO DE LUJO -->
         <section id="contacto">
             <div class="section-container">
                 <h2 class="section-title reveal" data-i18n="contact-title">Contacto</h2>
@@ -763,19 +861,22 @@
                 "bio-p1": "Formado en Venezuela en el seno de El Sistema y posteriormente en el Conservatorio Nacional Superior de Música y Danza de París, destaca por su sólida maestría en la orquesta sinfónica y una técnica de altísimo nivel. Su experiencia como trompetista solista de la prestigiosa Orquesta Nacional de Lyon consagra una trayectoria marcada ya por numerosas vivencias internacionales.",
                 "bio-p2": "Nacido en Caracas en 2001, inició sus estudios de trompeta en el Sistema Nacional de Orquestas Juveniles e Infantiles de Venezuela. Su precocidad musical lo llevó a integrar la Orquesta Sinfónica Nacional Infantil de Venezuela, con la que se presentó en el Festival de Salzburgo de 2013 bajo la dirección de Sir Simon Rattle y Gustavo Dudamel.",
                 "bio-p3": "Su recorrido lo ha llevado a actuar en festivales mayores de Austria, Italia y Grecia junto al Ensamble de Metales de Venezuela. Paralelamente, ha recibido la enseñanza de grandes referentes de la trompeta —como David Guerrier, Éric Aubier y Pacho Flores— en clases magistrales que han contribuido a moldear su identidad artística y a profundizar su virtuosismo.",
-                "bio-p4": "Desde 2022 continúa su perfeccionamiento en el Conservatorio Nacional Superior de Música y Danza de París con los profesores Alexandre Baty y Stéphane Gourvat. Su actividad profesional incluye invitaciones regulares por parte de destacadas instituciones musicales como la Orquesta Filarmónica de Radio France y la Ópera Nacional de París.",
+                "bio-p4": "Desde 2022 continúa su perfeccionamiento en le Conservatorio Nacional Superior de Música y Danza de París con los profesores Alexandre Baty y Stéphane Gourvat. Su actividad profesional incluye invitaciones regulares por parte de destacadas instituciones musicales como la Orquesta Filarmónica de Radio France y la Ópera Nacional de París.",
                 "bio-p5": "A través de un camino construido entre la tradición orquestal venezolana y la excelencia musical francesa, desarrolla una personalidad artística virtuosa, comprometida y profundamente vinculada a la escena sinfónica.",
-                "bio-box-title": "Trompetista Solista | Orquesta Nacional de Lyon",
-                "bio-box-p": "Heredera de una sólida tradición musical fundada en 1905, la Orquesta Nacional de Lyon (ONL) destaca como uno de los conjuntos sinfónicos más dinámicos de Europa. Eugenio Carreño Jr. aporta su brillantez interpretativa a este conjunto célebre por su excelencia, versatilidad y proyección internacional.",
                 "parallax-quote": "\"La música es la arquitectura del sonido, y la trompeta, su voz más brillante.\"",
                 "parallax-sub": "Pasión y Disciplina Sinfónica",
                 "awards-title": "Reconocimientos",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
+                "quote-1": "\"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right.\"",
+                "pacho-name": "Pacho Flores",
                 "quote-2": "\"El Joven Carreño posee un gran dominio técnico y sobre todo un Gran Corazón Musical. Su enfoque interpretativo apunta a un gran respeto por la música, a través de una interpretación clara y precisa.\"",
                 "quote-2-sub": "Solista Internacional",
                 "quote-3": "\"Reconocido como semifinalista en la prestigiosa 7ª edición del Concurso Internacional de Trompeta Maurice André en París (2022), consolidando su proyección global entre los mejores talentos de su generación.\"",
                 "maurice-title": "Concurso Maurice André",
                 "maurice-sub": "Semifinalista • París 2022",
+                "quote-4": "\"Posicionado como trompetista solista de la Orquesta Nacional de Lyon, aportando su brillantez interpretativa a uno de los conjuntos sinfónicos más dinámicos y prestigiosos de Europa.\"",
+                "lyon-title": "Orquesta Nacional de Lyon",
+                "lyon-sub": "Trompetista Solista",
                 "rep-title": "Repertorio Destacado", "rep-action": "Ver Interpretación ➔",
                 "rep-more": "Ver más repertorio (Canal de YouTube)", "rep-channel": "Visitar Canal ➔",
                 "contact-title": "Contacto", "contact-p": "Disponible para compromisos orquestales, proyectos de cámara y oportunidades de grabación a nivel internacional.",
@@ -787,7 +888,9 @@
                 pageTitle: "Eugenio Carreño Jr. | Solo Trumpeter",
                 subtitle: "Classical Trumpet",
                 "nav-home": "Home", "nav-bio": "Biography", "nav-awards": "Recognitions", "nav-repertoire": "Repertoire", "nav-contact": "Contact",
-                "hero-pre": "International Soloist", "hero-h1-1": "The art of sound", "hero-h1-2": "and orchestration.",
+                "hero-pre": "International Soloist",
+                "hero-h1-1": "The art of sound",
+                "hero-h1-2": "and orchestration.",
                 "hero-p": "Forged in El Sistema of Venezuela and perfected at the National Superior Conservatory of Paris. A symphonic technique of the highest level, consolidated upon taking up the position of solo trumpet of the prestigious Orchestre National de Lyon.",
                 "btn-works": "Explore Works", "btn-booking": "Request Booking",
                 "bio-title": "Biography",
@@ -796,21 +899,25 @@
                 "bio-p3": "His path has subsequently led him to perform at major festivals in Austria, Italy, and Greece with the Venezuelan Brass Ensemble. Concurrently, he has benefited from the teaching of great trumpet figures—such as David Guerrier, Éric Aubier, and Pacho Flores—in masterclasses that have shaped his artistic identity and deepened his virtuosity.",
                 "bio-p4": "Since 2022, he has continued his advanced studies at the National Superior Conservatory of Music and Dance in Paris under Alexandre Baty and Stéphane Gourvat. His professional activity also involves regular invitations by major musical institutions such as the Orchestre Philharmonique de Radio France and the Paris National Opera.",
                 "bio-p5": "Through a journey built between the Venezuelan orchestral tradition and French musical excellence, he develops an artistic personality that is both virtuoso, committed, and deeply dedicated to the symphonic scene.",
-                "bio-box-title": "Solo Trumpeter | Orchestre National de Lyon",
-                "bio-box-p": "Heir to a solid musical tradition founded in 1905, the Orchestre National de Lyon (ONL) stands out as one of Europe's most dynamic symphonic ensembles. Eugenio Carreño Jr. brings his interpretive brilliance to an ensemble celebrated for its excellence, versatility, and international projection.",
                 "parallax-quote": "\"Music is the architecture of sound, and the trumpet, its brightest voice.\"",
                 "parallax-sub": "Symphonic Passion and Discipline",
                 "awards-title": "Recognitions",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
+                "quote-1": "\"This is a testament to his innate, powerful artistry and his musical intelligence. He is the very embodiment of our belief in El Sistema that music is a fundamental human right.\"",
+                "pacho-name": "Pacho Flores",
                 "quote-2": "\"Young Carreño possesses great technical mastery and, above all, a Great Musical Heart. His interpretive approach aims at deep respect for music, conveyed through clear and precise performance.\"",
                 "quote-2-sub": "International Soloist",
                 "quote-3": "\"Recognized as a semifinalist in the prestigious 7th edition of the Maurice André International Trumpet Competition in Paris (2022), consolidating his global projection among his generation's top talents.\"",
                 "maurice-title": "Maurice André Competition",
                 "maurice-sub": "Semifinalist • Paris 2022",
+                "quote-4": "\"Positioned as solo trumpet of the Orchestre National de Lyon, bringing his interpretive brilliance to one of Europe's most dynamic and prestigious symphonic ensembles.\"",
+                "lyon-title": "Orchestre National de Lyon",
+                "lyon-sub": "Solo Trumpeter",
                 "rep-title": "Featured Repertoire", "rep-action": "Watch Performance ➔",
                 "rep-more": "View more repertoire (YouTube Channel)", "rep-channel": "Visit Channel ➔",
                 "contact-title": "Contact", "contact-p": "Available for orchestral engagements, chamber projects, and recording opportunities internationally.",
-                "contact-c1-type": "Booking & Management", "contact-c1-act": "Send Email ➔",
+                "contact-c1-type": "Booking & Management",
+                "contact-c1-act": "Send Email ➔",
                 "contact-c3-act": "Visit Profile ➔",
                 "footer-rights": "&copy; 2026 Eugenio Carreño Jr. All rights reserved."
             },
@@ -832,24 +939,27 @@
                 "bio-p1": "Formé au Venezuela au sein d’El Sistema, puis au Conservatoire National Supérieur de Musique et de Danse de Paris, il s’impose par une solide maîtrise de l’orchestre symphonique et une technique de haut niveau. Son expérience en tant que trompette solo au sein du prestigieux Orchestre National de Lyon vient consacrer un parcours déjà marqué par de nombreuses expériences internationales.",
                 "bio-p2": "Né à Caracas en 2001, il commence la trompette au sein du Système National des Orchestres Juvéniles et Infantiles du Venezuela. Sa précocité musicale le conduit à intégrer l’Orchestre Symphonique National Infantil du Venezuela, avec lequel il se produit notamment au Festival de Salzbourg en 2013 sous la direction de Sir Simon Rattle et de Gustavo Dudamel.",
                 "bio-p3": "Son parcours l’amène ensuite à se produire dans plusieurs festivals majeurs en Autriche, en Italie et en Grèce avec l’Ensemble de Cuivres du Venezuela. Il bénéficie parallèlement de l’enseignement de grands noms de la trompette, notamment David Guerrier, Éric Aubier et Pacho Flores, lors de masterclasses qui contribuent à façonner son identité artistique et à approfondir sa virtuosité.",
-                "bio-p4": "Depuis 2022, il poursuit son perfectionnement au Conservatoire National Supérieur de Musique et de Danse de Paris auprès d’Alexandre Baty et de Stéphane Gourvat. Son activité profesional l’amène également à être régulièrement invité par des institutions musicales majeures telles que l’Orchestre Philharmonique de Radio France et l’Opéra National de Paris.",
+                "bio-p4": "Depuis 2022, il poursuit son perfectionnement au Conservatoire National Supérieur de Musique et de Danse de Paris auprès d’Alexandre Baty et de Stéphane Gourvat. Son activité professionnelle l’amène également à être régulièrement invité par des institutions musicales majeures telles que l’Orchestre Philharmonique de Radio France et l’Opéra National de Paris.",
                 "bio-p5": "À travers un parcours construit entre tradition orchestrale vénézuélienne et excellence musicale française, il développe une personnalité artistique à la fois virtuose, engagée et profondément tournée vers la scène symphonique.",
-                "bio-box-title": "Trompette Solo | Orchestre National de Lyon",
-                "bio-box-p": "Héritière d'une solide tradition musicale fondée en 1905, l'Orchestre National de Lyon (ONL) s'impose comme l'un des ensembles symphoniques les plus dynamiques d'Europe. Eugenio Carreño Jr. apporte son brio interprétatif à un ensemble reconnu pour son excellence et sa projection internationale.",
                 "parallax-quote": "\"La musique est l'architecture du son, et la trompette, sa voix la plus brillante.\"",
                 "parallax-sub": "Passion et Discipline Sinfónica",
                 "awards-title": "Distinctions",
                 "dudamel-title": "Music Director, LA Phil / New York Philharmonic",
+                "quote-1": "\"Ceci témoigne de son art inné et puissant ainsi que de son intelligence musicale. Il incarne parfaitement notre conviction au sein d'El Sistema selon laquelle la musique est un droit humain fondamental.\"",
+                "pacho-name": "Pacho Flores",
                 "quote-2": "\"Le jeune Carreño possède une grande maîtrise technique et, par-dessus tout, un grand cœur musical. Son approche interprétative vise un grand respect de la musique, à travers une interprétation claire et précise.\"",
                 "quote-2-sub": "Solista International",
                 "quote-3": "\"Reconnu comme demi-finaliste lors de la prestigieuse 7e édition du Concours International de Trompette Maurice André à Paris (2022), consolidant sa projection internationale.\"",
                 "maurice-title": "Concours Maurice André",
                 "maurice-sub": "Demi-finaliste • Paris 2022",
+                "quote-4": "\"Positionné en tant que trompette solo de l'Orchestre National de Lyon, apportant son brio interprétatif à l'un des ensembles symphoniques les plus dynamiques d'Europe.\"",
+                "lyon-title": "Orchestre National de Lyon",
+                "lyon-sub": "Trompette Solo",
                 "rep-title": "Répertoire Phare",
                 "rep-action": "Voir la Vidéo ➔",
                 "rep-more": "Voir plus de répertoire (Chaîne YouTube)",
                 "rep-channel": "Visiter la Chaîne ➔",
-                "contact-title": "Contact",
+                "contact-title": "Contacto",
                 "contact-p": "Disponible pour des engagements orchestrales, des projets de musique de chambre et des opportunités d'enregistrement à l'international.",
                 "contact-c1-type": "Booking & Management",
                 "contact-c1-act": "Enviar Correo ➔",
